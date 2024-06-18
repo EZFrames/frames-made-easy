@@ -1,11 +1,11 @@
 import { FrameMetadataType, getFrameMetadata } from "@coinbase/onchainkit";
-import { getFrameById } from "~~/app/api/orchestrator/[frameId]/route";
+import { getFrameById } from "~~/services/frames";
 
 export async function generateMetadata({ params }: any) {
   const frameId = params.frameId;
   const frame = getFrameById(frameId);
   return {
-    title: "zizzamia.xyz",
+    title: "Frames Made by Frames made easy!",
     other: {
       ...getFrameMetadata(frame as FrameMetadataType),
     },
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: any) {
 export default function Page() {
   return (
     <>
-      <h1>zizzamia.xyz</h1>
+      <h1>Frames Check this on warpcast</h1>
     </>
   );
 }
