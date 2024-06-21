@@ -258,6 +258,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "@coinbase/onchainkit@npm:^0.11.0":
   version: 0.11.3
   resolution: "@coinbase/onchainkit@npm:0.11.3"
@@ -276,6 +277,11 @@ __metadata:
 "@coinbase/wallet-sdk@npm:4.0.0":
   version: 4.0.0
   resolution: "@coinbase/wallet-sdk@npm:4.0.0"
+=======
+"@coinbase/wallet-sdk@npm:4.0.2":
+  version: 4.0.2
+  resolution: "@coinbase/wallet-sdk@npm:4.0.2"
+>>>>>>> 3ed3638 (paymaster and smart wallet added)
   dependencies:
     buffer: ^6.0.3
     clsx: ^1.2.1
@@ -283,7 +289,7 @@ __metadata:
     keccak: ^3.0.3
     preact: ^10.16.0
     sha.js: ^2.4.11
-  checksum: f9101233cd4529daae235eb01fcd10fe3c9ab075b3171beacb755ff475be7a9e33957fb4ffedbdd34092c3045ddcbf6fda181a5adfd531307a4cc8937861ef38
+  checksum: d0cb646ae8a57142f0abc9a46ae449c732aec6347fc217547854ebb872668716b9494c5232dc564eeab2e26c9b24df3cfd536b7ee3027a39d5e9e89a6d05ea9c
   languageName: node
   linkType: hard
 
@@ -2146,6 +2152,7 @@ __metadata:
     "@coinbase/onchainkit": ^0.11.0
     "@heroicons/react": ^2.0.11
     "@rainbow-me/rainbowkit": 2.1.0
+    "@stripe/crypto": ^0.0.4
     "@tanstack/react-query": ^5.28.6
     "@trivago/prettier-plugin-sort-imports": ^4.1.1
     "@types/node": ^17.0.35
@@ -2168,6 +2175,7 @@ __metadata:
     next: ^14.0.4
     next-themes: ^0.2.1
     nprogress: ^0.2.0
+    permissionless: ^0.1.30
     postcss: ^8.4.16
     prettier: ^2.8.4
     qrcode.react: ^3.1.0
@@ -2183,7 +2191,7 @@ __metadata:
     uuidv4: ^6.2.13
     vercel: ^32.4.1
     viem: 2.10.9
-    wagmi: 2.9.2
+    wagmi: 2.9.5
     zustand: ^4.1.2
   languageName: unknown
   linkType: soft
@@ -2469,6 +2477,15 @@ __metadata:
     "@stablelib/random": ^1.0.2
     "@stablelib/wipe": ^1.0.1
   checksum: f8537066b542b6770c1b5b2ae5ad0688d1b986e4bf818067c152c123a5471531987bbf024224f75f387f481ccc5b628e391e49e92102b8b1a3e2d449d6105402
+  languageName: node
+  linkType: hard
+
+"@stripe/crypto@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@stripe/crypto@npm:0.0.4"
+  peerDependencies:
+    "@stripe/stripe-js": ^1.46.0
+  checksum: 9d543fb39fdc13350a00794dafe1d60b7ba80841f6f218ad72c15400064a77d5f02dc3fa23b6019e958252398c6f588ac04eb606242a63ee7bc556c7bc5d8e6d
   languageName: node
   linkType: hard
 
@@ -3444,11 +3461,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wagmi/connectors@npm:5.0.2":
-  version: 5.0.2
-  resolution: "@wagmi/connectors@npm:5.0.2"
+"@wagmi/connectors@npm:5.0.4":
+  version: 5.0.4
+  resolution: "@wagmi/connectors@npm:5.0.4"
   dependencies:
-    "@coinbase/wallet-sdk": 4.0.0
+    "@coinbase/wallet-sdk": 4.0.2
     "@metamask/sdk": 0.20.3
     "@safe-global/safe-apps-provider": 0.18.1
     "@safe-global/safe-apps-sdk": 8.1.0
@@ -3456,13 +3473,13 @@ __metadata:
     "@walletconnect/modal": 2.6.2
     cbw-sdk: "npm:@coinbase/wallet-sdk@3.9.3"
   peerDependencies:
-    "@wagmi/core": 2.10.2
+    "@wagmi/core": 2.10.3
     typescript: ">=5.0.4"
     viem: 2.x
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 2c03cc7b3db25da9631afecfb5b40817d6205bd67e0e306a235bc07742f2cee7b120141197d6f165446e84f5c618a9f556d4bb5fa0e1392368f9ee6e7b950d50
+  checksum: b6ecdf5e4450bebfdb0415e61f323bb9bd9ec4e3d294202bfa4032297dbb645771480dfbbb56b9530bdc0ad353a594634cb3adbbc13f6d7502bfc54873420587
   languageName: node
   linkType: hard
 
@@ -3483,6 +3500,26 @@ __metadata:
     typescript:
       optional: true
   checksum: a738aea155f662da2e538c3ba8ee2556eb317abc8a1bcac1e3d3002300dd65a7c7d7fa414419d8a306e0612c47e226368cacb88111b7071cd01366672a3394d0
+  languageName: node
+  linkType: hard
+
+"@wagmi/core@npm:2.10.3":
+  version: 2.10.3
+  resolution: "@wagmi/core@npm:2.10.3"
+  dependencies:
+    eventemitter3: 5.0.1
+    mipd: 0.0.5
+    zustand: 4.4.1
+  peerDependencies:
+    "@tanstack/query-core": ">=5.0.0"
+    typescript: ">=5.0.4"
+    viem: 2.x
+  peerDependenciesMeta:
+    "@tanstack/query-core":
+      optional: true
+    typescript:
+      optional: true
+  checksum: 80c7929d933c7527c929c12187f60e86373af83581ffa3331d183995703a471d487ca2c1a85b998686af6dfe57358950e5aea593046ccdd53937d502fa6a411d
   languageName: node
   linkType: hard
 
@@ -11435,6 +11472,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"permissionless@npm:^0.1.30":
+  version: 0.1.30
+  resolution: "permissionless@npm:0.1.30"
+  peerDependencies:
+    viem: ^2.9.17
+  checksum: e345aa52cfdcfa6418adab76f1167942484937cdab39f25baed55a2dba3cbe0dc31df793c5422b5e448c91ec0ff60773f0900c4d06de93d74f7a624cf2f91d1b
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:1.0.0, picocolors@npm:^1, picocolors@npm:^1.0.0":
   version: 1.0.0
   resolution: "picocolors@npm:1.0.0"
@@ -14633,12 +14679,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wagmi@npm:2.9.2":
-  version: 2.9.2
-  resolution: "wagmi@npm:2.9.2"
+"wagmi@npm:2.9.5":
+  version: 2.9.5
+  resolution: "wagmi@npm:2.9.5"
   dependencies:
-    "@wagmi/connectors": 5.0.2
-    "@wagmi/core": 2.10.2
+    "@wagmi/connectors": 5.0.4
+    "@wagmi/core": 2.10.3
     use-sync-external-store: 1.2.0
   peerDependencies:
     "@tanstack/react-query": ">=5.0.0"
@@ -14648,7 +14694,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 202a5b1c2e78c698f3b23817415ca5e588632c82182f7f7d33175c1cdcebe497aa8c41a83f021d7d6c9ed091c611cc252a7b5146b6ceb1be60153d744cc23b4e
+  checksum: acc20f7fbbd7cff95a7e221cbb279b2b7351287b2ae89e80873c57b3eef6b98ea6f373be365a2d5133ac558a3979fc789c36b1379323351252941f260b6e66b7
   languageName: node
   linkType: hard
 

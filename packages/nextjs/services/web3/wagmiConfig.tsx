@@ -1,6 +1,6 @@
-import { wagmiConnectors } from "./wagmiConnectors";
+import { coinbaseWallet } from 'wagmi/connectors';
 import { Chain, createClient, http } from "viem";
-import { hardhat, mainnet } from "viem/chains";
+import { hardhat, mainnet, baseSepolia } from "viem/chains";
 import { createConfig } from "wagmi";
 import scaffoldConfig from "~~/scaffold.config";
 import { getAlchemyHttpUrl } from "~~/utils/scaffold-eth";
@@ -13,8 +13,13 @@ export const enabledChains = targetNetworks.find((network: Chain) => network.id 
   : ([...targetNetworks, mainnet] as const);
 
 export const wagmiConfig = createConfig({
-  chains: enabledChains,
-  connectors: wagmiConnectors,
+  chains: [baseSepolia],
+  connectors: [
+    coinbaseWallet({
+      appName: 'Create Wagmi',
+      preference: 'smartWalletOnly',
+    }),
+  ],
   ssr: true,
   client({ chain }) {
     return createClient({
