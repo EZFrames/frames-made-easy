@@ -258,7 +258,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
 "@coinbase/onchainkit@npm:^0.11.0":
   version: 0.11.3
   resolution: "@coinbase/onchainkit@npm:0.11.3"
@@ -274,14 +273,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coinbase/wallet-sdk@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@coinbase/wallet-sdk@npm:4.0.0"
-=======
 "@coinbase/wallet-sdk@npm:4.0.2":
   version: 4.0.2
   resolution: "@coinbase/wallet-sdk@npm:4.0.2"
->>>>>>> 3ed3638 (paymaster and smart wallet added)
   dependencies:
     buffer: ^6.0.3
     clsx: ^1.2.1
