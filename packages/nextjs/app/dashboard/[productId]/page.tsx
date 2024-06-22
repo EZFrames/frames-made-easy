@@ -32,9 +32,14 @@ const FrameExample: FrameMetadataType = {
 
 const Product: NextPage = () => {
   return (
-    <div className="flex items-center flex-col flex-grow pt-10">
-      <FrameRender frame={FrameExample} />
-      <FrameEditor frame={FrameExample} />
+    <div className="grid grid-cols-3 gap-4 pt-2 h-[100%]">
+      <div className="col-span-1"></div>
+      <div className="col-span-1">
+        <FrameRender frame={FrameExample} />
+      </div>
+      <div className="col-span-1 h-[100%]">
+        <FrameEditor frame={FrameExample} />
+      </div>
     </div>
   );
 };
