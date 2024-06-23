@@ -16,7 +16,7 @@ export const wagmiConfig = createConfig({
   chains: [baseSepolia],
   connectors: [
     coinbaseWallet({
-      appName: 'Create Wagmi',
+      appName: 'Frames Builder',
       preference: 'smartWalletOnly',
     }),
   ],

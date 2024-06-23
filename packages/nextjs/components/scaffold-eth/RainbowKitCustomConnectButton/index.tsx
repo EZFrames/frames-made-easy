@@ -6,6 +6,7 @@
 import React, { useCallback } from 'react';
 import { useConnect, useAccount, useDisconnect } from 'wagmi';
 import { CoinbaseWalletLogo } from './CoinbaseWalletLogo';
+import { AddressInfoDropdown } from './AddressInfoDropdown';
  
 const buttonStyles = {
   background: 'transparent',
@@ -39,7 +40,7 @@ export function RainbowKitCustomConnectButton() {
   }, [connectors, connect]);
   return (
     <>
-      {account.address ? (<><div>{account.address}</div> <button onClick={() => disconnect()}>Disconnect</button> </>) : (
+      {account.address ? (<><AddressInfoDropdown address={account.address} blockExplorerAddressLink={undefined} displayName={''}/></>) : (
         <button style={{
           background: 'transparent',
           border: '1px solid transparent',
