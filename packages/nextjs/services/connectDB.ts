@@ -32,7 +32,9 @@ async function connectDB(): Promise<Mongoose> {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(DATABASE_URL, opts).then(mongoose => mongoose);
+    cached.promise = mongoose.connect(DATABASE_URL, opts).then(mongoose => {
+      return mongoose;
+    });
   }
 
   cached.conn = await cached.promise;

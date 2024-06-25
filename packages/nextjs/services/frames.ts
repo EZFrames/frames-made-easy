@@ -2,6 +2,8 @@ export const getFrameById = (id: number) => {
   return {
     buttons: [
       {
+        action: "post",
+        target: "http://localhost:3000/api/orchestrator/1",
         label: `Home ${id}`,
       },
       {
@@ -19,6 +21,8 @@ export const getFrameById = (id: number) => {
     },
     state: {
       time: new Date().toISOString(),
+      journey_id: "1",
+      frame_id: "2",
     },
   };
 };
