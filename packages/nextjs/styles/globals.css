@@ -30,3 +30,35 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+.page {
+  height: 100vh;
+}
+
+.page::before {
+  content: "";
+  position: fixed;
+  width: 300%;
+  height: 100%;
+  top: 45%;
+  left: 50%;
+  background-color: #2196f3;
+  background-color: #0075ff;
+  border-radius: 50%;
+  transform: translateX(-50%) skew(0, -10deg);
+  animation: wave 7s ease-in-out infinite alternate;
+  -webkit-animation: wave 7s ease-in-out infinite alternate;
+  z-index: -1;
+}
+@keyframes wave {
+  from {
+      transform: translateX(-50%) skew(0, -10deg);
+  }
+  to {
+      transform: translateX(-30%) skew(10deg, 0);
+      -webkit-transform: translateX(-30%) skew(10deg, 0);
+      -moz-transform: translateX(-30%) skew(10deg, 0);
+      -ms-transform: translateX(-30%) skew(10deg, 0);
+      -o-transform: translateX(-30%) skew(10deg, 0);
+}
+}
