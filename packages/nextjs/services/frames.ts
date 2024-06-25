@@ -1,3 +1,5 @@
+import { FrameMetadataType } from "@coinbase/onchainkit";
+
 export const getFrameById = (id: number) => {
   return {
     buttons: [
@@ -24,5 +26,8 @@ export const getFrameById = (id: number) => {
       journey_id: "1",
       frame_id: "2",
     },
-  };
+    input: {
+      text: "Type here",
+    },
+  } as FrameMetadataType;
 };
