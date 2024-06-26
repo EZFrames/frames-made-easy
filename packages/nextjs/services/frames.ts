@@ -1,4 +1,6 @@
 import { FrameMetadataType } from "@coinbase/onchainkit";
+import { Omit } from "viem/chains";
+import { Frame, Journey } from "~~/types/commontypes";
 
 export const getFrameById = (id: number) => {
   return {
@@ -30,4 +32,65 @@ export const getFrameById = (id: number) => {
       text: "Type here",
     },
   } as FrameMetadataType;
+};
+
+export const createFrame = async (frame: Omit<Frame, "_id">) => {
+  try {
+    const response = await fetch(`/api/frame`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(frame),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export const createJourney = async (journey: Omit<Journey, "_id">) => {
+  const frame = await createFrame({
+    frameJson: getFrameById(1),
+    name: "Frame 1",
+  });
+  journey.frames = [frame._id];
+  try {
+    const response = await fetch(`/api/journey`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(journey),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  } catch (error: any) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+};
+
+export const saveFrame = async (frame: Frame) => {
+  try {
+    const response = await fetch(`/api/frame/${frame._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(frame),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  } catch (error: any) {
+    console.error(error);
+    throw new Error(error.message);
+  }
 };

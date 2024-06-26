@@ -1,12 +1,16 @@
-import { PropsWithChildren, createContext, useContext, useMemo } from "react";
+import { PropsWithChildren, createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { UseMutationResult, UseQueryResult, useMutation, useQuery } from "@tanstack/react-query";
-import { Journey } from "~~/types/commontypes";
+import { Frame, Journey } from "~~/types/commontypes";
+import { getFrameById } from "~~/services/frames";
 
 interface IProductJourney {
   productID: string;
   productQuery: UseQueryResult<Journey | null, Error>;
   updateProduct: UseMutationResult<Journey, Error, Partial<Journey>>;
+  frame: Frame | null;
+  setFrame: (frame: Frame) => void;
+  journey: Journey | null;
 }
 
 const ProductJourney = createContext<IProductJourney | null>(null);
@@ -16,6 +20,13 @@ const useProduct = () => {
   const productID = useMemo(() => {
     return params.productID as string;
   }, [params.productID]);
+  const [journey, setJourney] = useState<Journey | null>(null);
+  const [frame, setFrame] = useState<Frame | null>({
+    _id: "",
+    name: "",
+    frameJson: getFrameById(1),
+  });
+
 
   const productQuery = useQuery({
     queryKey: ["product", productID],
@@ -48,10 +59,19 @@ const useProduct = () => {
     },
   });
 
+  useEffect(() => {
+    if (!productQuery.data) return;
+    setJourney(productQuery.data);
+    setFrame(productQuery.data.frames[0]);
+  }, [productQuery.data]);
+
   return {
     productID,
     productQuery,
     updateProduct,
+    frame,
+    setFrame,
+    journey,
   };
 };
 

@@ -6,6 +6,7 @@ import FrameEditor from "~~/components/FrameEditor";
 import FrameRender from "~~/components/FrameRenderer";
 import FrameSidebar from "~~/components/FramesSidebar";
 import { APP_URL } from "~~/constants";
+import { ProvideProduct } from "~~/providers/ProductProvider";
 
 const FrameExample: FrameMetadataType = {
   buttons: [
@@ -33,17 +34,19 @@ const FrameExample: FrameMetadataType = {
 
 const Product: NextPage = () => {
   return (
-    <div className="grid grid-cols-6 gap-4 pt-2 h-[100%]">
-      <div className="col-span-1">
-        <FrameSidebar frames={[FrameExample, FrameExample, FrameExample, FrameExample]} />
+    <ProvideProduct>
+      <div className="grid grid-cols-6 gap-4 pt-2 h-[100%]">
+        <div className="col-span-1">
+          <FrameSidebar frames={[FrameExample, FrameExample, FrameExample, FrameExample]} />
+        </div>
+        <div className="col-span-3">
+          <FrameRender frame={FrameExample} />
+        </div>
+        <div className="col-span-2 h-[100%]">
+          <FrameEditor />
+        </div>
       </div>
-      <div className="col-span-3">
-        <FrameRender frame={FrameExample} />
-      </div>
-      <div className="col-span-2 h-[100%]">
-        <FrameEditor frame={FrameExample} />
-      </div>
-    </div>
+    </ProvideProduct>
   );
 };
 

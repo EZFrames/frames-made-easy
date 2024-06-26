@@ -11,11 +11,14 @@ export interface JourneyJson {
 
 export interface Journey {
   _id: string;
-  name: string;
   walletAddress: string;
-  journeyJson: JourneyJson;
+  name: string;
   desc?: string;
   image?: string;
+  prodId: string;
+  quantity: number;
+  price: string;
+  frames: string[];
   createdAt: string;
   updatedAt: string;
 }
