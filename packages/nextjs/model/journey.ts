@@ -1,14 +1,16 @@
-import { Journey as JourneyType } from "../types/commontypes";
+import { FrameMetadataType } from "@coinbase/onchainkit";
 import mongoose, { Document, Schema } from "mongoose";
 
 // Define the JourneyDocument interface extending Document
 interface JourneyDocument extends Document {
   walletAddress: string;
   name: string;
-  journeyJson: JourneyType;
   desc?: string;
   image?: string;
-  startingFrameURL?: string;
+  prodId: string;
+  quantity: number;
+  price: string;
+  frames: string[];
 }
 
 // Define the Journey schema
@@ -16,9 +18,12 @@ const JourneySchema: Schema<JourneyDocument> = new Schema<JourneyDocument>(
   {
     walletAddress: String,
     name: String,
-    journeyJson: Object as any as JourneyType, // Type assertion to any
     desc: String,
     image: String,
+    prodId: String,
+    quantity: Number,
+    price: String,
+    frames: [String],
   },
   {
     timestamps: true,

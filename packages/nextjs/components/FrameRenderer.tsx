@@ -6,7 +6,7 @@ type FrameRenderProps = {
 
 function FrameRender({ frame }: FrameRenderProps) {
   return (
-    <div>
+    <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={frame.image as string}
@@ -36,7 +36,7 @@ function FrameRender({ frame }: FrameRenderProps) {
         {frame.buttons?.map(({ label, action }, index: number) => (
           <button
             type="button"
-            className={`bg-gray-200 p-2 hover:bg-gray-300 `}
+            className={`bg-gray-200 p-1 hover:bg-gray-300 `}
             style={{
               flex: "1 1 0px",
               cursor: "pointer",
@@ -49,7 +49,7 @@ function FrameRender({ frame }: FrameRenderProps) {
           </button>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

@@ -148,6 +148,32 @@ const FrameEditor = ({ frame }: FrameEditorProps) => {
             <option value="post_redirect">Post Redirect</option>
             <option value="tx">Transaction</option>
           </select>
+          <label htmlFor="buttonTarget" className="block text-sm font-medium text-gray-700 mb-1">
+            <input
+              id="buttonTarget"
+              type="text"
+              value={buttons[activeButtonIndex].target}
+              onChange={e => handleSaveButton({ ...buttons[activeButtonIndex], target: e.target.value })}
+              placeholder="Button Target"
+              className="w-full p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100 text-black"
+            />
+          </label>
+          {buttons[activeButtonIndex].action === "tx" && (
+            <>
+              <label htmlFor="buttonPostUrl" className="block text-sm font-medium text-gray-700 mb-1">
+                <input
+                  id="buttonPostUrl"
+                  type="text"
+                  // @ts-ignore
+                  value={buttons[activeButtonIndex].postUrl}
+                  // @ts-ignore
+                  onChange={e => handleSaveButton({ ...buttons[activeButtonIndex], postUrl: e.target.value as any })}
+                  placeholder="Button Post URL"
+                  className="w-full p-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-100 text-black"
+                />
+              </label>
+            </>
+          )}
         </>
       )}
       <button

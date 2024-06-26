@@ -4,6 +4,7 @@ import { FrameMetadataType } from "@coinbase/onchainkit";
 import type { NextPage } from "next";
 import FrameEditor from "~~/components/FrameEditor";
 import FrameRender from "~~/components/FrameRenderer";
+import FrameSidebar from "~~/components/FramesSidebar";
 import { APP_URL } from "~~/constants";
 
 const FrameExample: FrameMetadataType = {
@@ -32,12 +33,14 @@ const FrameExample: FrameMetadataType = {
 
 const Product: NextPage = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 pt-2 h-[100%]">
-      <div className="col-span-1"></div>
+    <div className="grid grid-cols-6 gap-4 pt-2 h-[100%]">
       <div className="col-span-1">
+        <FrameSidebar frames={[FrameExample, FrameExample, FrameExample, FrameExample]} />
+      </div>
+      <div className="col-span-3">
         <FrameRender frame={FrameExample} />
       </div>
-      <div className="col-span-1 h-[100%]">
+      <div className="col-span-2 h-[100%]">
         <FrameEditor frame={FrameExample} />
       </div>
     </div>
