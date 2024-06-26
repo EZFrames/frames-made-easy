@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ButtonList from "./ButtonsList";
 import InputField from "./InputField";
 import { FrameImageMetadata } from "@coinbase/onchainkit";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 import { useProductJourney } from "~~/providers/ProductProvider";
 
 const FrameEditor = () => {

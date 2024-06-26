@@ -1,10 +1,9 @@
-import { FrameMetadataType } from "@coinbase/onchainkit";
+import { useProductJourney } from "~~/providers/ProductProvider";
 
-type FrameRenderProps = {
-  frame: FrameMetadataType;
-};
-
-function FrameRender({ frame }: FrameRenderProps) {
+function FrameRender() {
+  const { frame: dbFrame } = useProductJourney();
+  const frame = dbFrame?.frameJson;
+  if (!frame) return null;
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -35,14 +35,14 @@ const FrameExample: FrameMetadataType = {
 const Product: NextPage = () => {
   return (
     <ProvideProduct>
-      <div className="grid grid-cols-6 gap-4 pt-2 h-[100%]">
+      <div className="grid grid-cols-6 gap-4 pt-2">
         <div className="col-span-1">
           <FrameSidebar frames={[FrameExample, FrameExample, FrameExample, FrameExample]} />
         </div>
         <div className="col-span-3">
           <FrameRender frame={FrameExample} />
         </div>
-        <div className="col-span-2 h-[100%]">
+        <div className="col-span-2 ">
           <FrameEditor />
         </div>
       </div>
