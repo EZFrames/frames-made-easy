@@ -1,4 +1,3 @@
-import { FrameMetadataType } from "@coinbase/onchainkit";
 import mongoose, { Document, Schema } from "mongoose";
 
 // Define the JourneyDocument interface extending Document

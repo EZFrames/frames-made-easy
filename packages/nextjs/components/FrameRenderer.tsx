@@ -8,7 +8,8 @@ function FrameRender() {
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={frame.image as string}
+        // @ts-ignore
+        src={frame.image?.src as string}
         alt="Description of the image"
         style={{
           borderRadius: "4px",

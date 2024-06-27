@@ -15,7 +15,6 @@ export interface Journey {
   name: string;
   desc?: string;
   image?: string;
-  prodId: string;
   quantity: number;
   price: string;
   frames: string[];

@@ -1,3 +1,5 @@
+import React from "react";
+import satori from "next/dist/compiled/@vercel/og/satori";
 import { FrameMetadataType } from "@coinbase/onchainkit";
 import { Omit } from "viem/chains";
 import { Frame, Journey } from "~~/types/commontypes";
@@ -21,7 +23,7 @@ export const getFrameById = (id: number) => {
       },
     ],
     image: {
-      src: `https://proxy.wrpcd.net/?url=https%3A%2F%2Ffal.media%2Ffiles%2Fkangaroo%2FpCG1MdbuiVonnhx0TLi5Q.jpeg&s=2ccf08f7863c7af641ddaa906919ce073607aa92ed98b2a16320d91e7bc12646`,
+      src: `https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png`,
     },
     state: {
       time: new Date().toISOString(),
@@ -52,7 +54,7 @@ export const createFrame = async (frame: Omit<Frame, "_id">) => {
   }
 };
 
-export const createJourney = async (journey: Omit<Journey, "_id">) => {
+export const createJourney = async (journey: Partial<Journey>) => {
   const frame = await createFrame({
     frameJson: getFrameById(1),
     name: "Frame 1",
@@ -93,4 +95,13 @@ export const saveFrame = async (frame: Frame) => {
     console.error(error);
     throw new Error(error.message);
   }
+};
+
+export const createImageFromHtml = async (html: string) => {
+  const svg = await satori(React.createElement("div", { dangerouslySetInnerHTML: { __html: html } }), {
+    width: 600,
+    height: 400,
+    fonts: [],
+  });
+  return svg;
 };
