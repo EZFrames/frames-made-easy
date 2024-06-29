@@ -19,7 +19,7 @@ const slides = [
   { id: 3, title: 'Frame 3', content: 'This is the third slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
   { id: 3, title: 'Frame 3', content: 'This is the third slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
   { id: 3, title: 'Frame 3', content: 'This is the third slide' ,img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs' },
-        { id: 3, title: 'Frame 3', content: 'This is the third slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
+        { id: 3, title: 'Frame 3', content: 'This  is the third slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
  
 ];
   const thumbnailImageStyle = {
