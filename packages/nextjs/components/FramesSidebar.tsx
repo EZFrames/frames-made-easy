@@ -5,9 +5,9 @@ import { getFrameById } from "~~/services/frames";
 import { Frame } from "~~/types/commontypes";
 
 function FrameSidebar() {
-  const [currentFrameId, setCurrentFrameId] = useState<string>("");
-  const { frames: dbFrames, setFrame, setCurrentFrame, createFrame } = useProductJourney();
+  const { frames: dbFrames, frame, setFrame, setCurrentFrame, createFrame } = useProductJourney();
   const [frames, setFrames] = useState<Frame[] | undefined>(undefined);
+  const [currentFrameId, setCurrentFrameId] = useState<string>(frame?._id as string);
   useEffect(() => {
     if (dbFrames) {
       Promise.all(dbFrames.map(frame => getFrameById(frame)))
@@ -15,6 +15,9 @@ function FrameSidebar() {
         .catch(error => console.error("Error fetching frames:", error));
     }
   }, [dbFrames]);
+  useEffect(() => {
+    setCurrentFrameId(frame?._id as string);
+  }, [frame]);
   const onCreate = async () => {
     await createFrame.mutateAsync({
       name: "Frame",
@@ -28,7 +31,9 @@ function FrameSidebar() {
         {frames.map((frame, index) => (
           <div
             key={index}
-            className={`border-2 p-2 w-full h-40 flex flex-col items-center justify-center ${currentFrameId === frame._id ? 'border-blue-500' : 'border-black'}`}
+            className={`border-2 p-2 w-full h-40 flex flex-col items-center justify-center ${
+              currentFrameId === frame._id ? "border-blue-500" : "border-black"
+            }`}
             onClick={() => {
               setCurrentFrameId(frame._id as string);
               setFrame(frame);

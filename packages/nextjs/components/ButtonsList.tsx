@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ButtonEditor from "./ButtonEditor";
 import { FrameButtonMetadata, FrameMetadataType } from "@coinbase/onchainkit";
 import { IconButton } from "@mui/material";
@@ -7,7 +7,7 @@ import { useProductJourney } from "~~/providers/ProductProvider";
 import { notification } from "~~/utils/scaffold-eth";
 
 const ButtonList = () => {
-  const { currentFrame, setCurrentFrame, frame, saveFrame } = useProductJourney();
+  const { currentFrame, setCurrentFrame, frame, saveFrame, deleteFrame } = useProductJourney();
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
 
   if (!currentFrame) return null;
@@ -93,7 +93,12 @@ const ButtonList = () => {
         <ButtonEditor button={currentFrame.buttons[activeButtonIndex]} onSave={handleSave} onDelete={handleDelete} />
       )}
       <div className="flex items-center">
-        <button onClick={handleSaveFrame} className="btn btn-error mt-2 flex items-center justify-center">
+        <button
+          onClick={() => {
+            deleteFrame.mutateAsync(frame?._id as string);
+          }}
+          className="btn btn-error mt-2 flex items-center justify-center"
+        >
           Delete Frame
         </button>
         <button onClick={handleSaveFrame} className="btn btn-success  mt-2 flex items-center justify-center">

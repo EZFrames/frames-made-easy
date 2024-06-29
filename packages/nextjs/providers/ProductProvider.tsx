@@ -17,7 +17,7 @@ interface IProductJourney {
   currentFrame: FrameMetadataType | null;
   createFrame: UseMutationResult<Frame, Error, Omit<Frame, "_id">>;
   saveFrame: UseMutationResult<Frame, Error, Frame>;
-  deleteFrame: UseMutationResult<Frame, Error, Frame>;
+  deleteFrame: UseMutationResult<Frame, Error, string>;
 }
 
 const ProductJourney = createContext<IProductJourney | null>(null);
@@ -123,8 +123,8 @@ const useProduct = () => {
   });
 
   const deleteFrame = useMutation({
-    mutationFn: async (frame: Frame) => {
-      const response = await fetch(`/api/frame/${frame._id}`, {
+    mutationFn: async (frameId: string) => {
+      const response = await fetch(`/api/frame/${frameId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +133,7 @@ const useProduct = () => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const newFrames = journey?.frames.filter(f => f !== frame._id);
+      const newFrames = journey?.frames.filter(f => f !== frameId);
       if (!newFrames || !journey) return;
       journey.frames = newFrames;
       await updateProduct.mutateAsync(journey);
@@ -141,7 +141,8 @@ const useProduct = () => {
       return data;
     },
     onSettled: () => {
-      console.log("Frame deleted");
+      setFrame(null);
+      setCurrentFrame(null);
     },
   });
   const frames = useMemo(() => {
