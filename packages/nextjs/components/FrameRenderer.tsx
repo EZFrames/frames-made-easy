@@ -32,19 +32,17 @@ function FrameRender() {
           gap: "4px",
         }}
       >
-        {currentFrame.buttons?.map(({ label, action }, index: number) => (
+        {currentFrame.buttons?.map(({ label }, index: number) => (
           <button
             type="button"
-            className={`bg-gray-200 p-1 hover:bg-gray-300 `}
+            className="btn bg-black rounded-md text-white px-4 py-2"
             style={{
               flex: "1 1 0px",
               cursor: "pointer",
             }}
             key={index}
           >
-            {action === "mint" ? `♦ ` : ""}
             {label}
-            {action === "post_redirect" || action === "link" ? ` ↗` : ""}
           </button>
         ))}
       </div>

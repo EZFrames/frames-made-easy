@@ -4,18 +4,11 @@ import { FrameButtonMetadata, FrameMetadataType } from "@coinbase/onchainkit";
 import { IconButton } from "@mui/material";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useProductJourney } from "~~/providers/ProductProvider";
-import { saveFrame } from "~~/services/frames";
 import { notification } from "~~/utils/scaffold-eth";
 
 const ButtonList = () => {
-  const { currentFrame, setCurrentFrame, frame } = useProductJourney();
-
+  const { currentFrame, setCurrentFrame, frame, saveFrame } = useProductJourney();
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
-  useEffect(() => {
-    console.log("currentFrame", currentFrame);
-    console.log(activeButtonIndex);
-    console.log(currentFrame?.buttons[activeButtonIndex]);
-  }, [currentFrame, activeButtonIndex]);
 
   if (!currentFrame) return null;
   const handleAddButton = () => {
@@ -39,12 +32,11 @@ const ButtonList = () => {
 
   const handleSaveFrame = async () => {
     notification.info("Frame saved successfully");
-    const updatedFrame = await saveFrame({
+    await saveFrame.mutateAsync({
       _id: frame?._id as string,
       name: frame?.name as string,
       frameJson: currentFrame as FrameMetadataType,
     });
-    console.log(updatedFrame);
   };
 
   const handleSave = (button: FrameButtonMetadata) => {
@@ -100,9 +92,14 @@ const ButtonList = () => {
       {currentFrame?.buttons[activeButtonIndex] && (
         <ButtonEditor button={currentFrame.buttons[activeButtonIndex]} onSave={handleSave} onDelete={handleDelete} />
       )}
-      <button onClick={handleSaveFrame} className="btn btn-secondary w-full mt-2 flex items-center justify-center">
-        Save Frame
-      </button>
+      <div className="flex items-center">
+        <button onClick={handleSaveFrame} className="btn btn-error mt-2 flex items-center justify-center">
+          Delete Frame
+        </button>
+        <button onClick={handleSaveFrame} className="btn btn-success  mt-2 flex items-center justify-center">
+          Save Frame
+        </button>
+      </div>
     </div>
   );
 };

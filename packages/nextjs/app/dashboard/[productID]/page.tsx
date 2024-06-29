@@ -9,11 +9,11 @@ import { ProvideProduct } from "~~/providers/ProductProvider";
 const Product: NextPage = () => {
   return (
     <ProvideProduct>
-      <div className="grid grid-cols-6 gap-4 pt-2">
+      <div className="grid grid-cols-6 gap-4 ">
         <div className="col-span-1">
           <FrameSidebar />
         </div>
-        <div className="col-span-3">
+        <div className="col-span-3 mt-24">
           <FrameRender />
         </div>
         <div className="col-span-2 ">

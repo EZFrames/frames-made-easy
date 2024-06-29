@@ -9,7 +9,7 @@ const FrameEditor = () => {
   const [imageUrlOption, setImageUrlOption] = useState("url");
   if (!currentFrame) return null;
   return (
-    <div className="p-6 h-[100vh] bg-white rounded-md shadow-md flex flex-col gap-4">
+    <div className="bg-white flex flex-col gap-4 p-4">
       <label htmlFor="imageInput" className="block text-sm font-medium text-gray-700">
         Image/HTML{" "}
       </label>
