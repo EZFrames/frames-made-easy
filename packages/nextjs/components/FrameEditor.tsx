@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ButtonList from "./ButtonsList";
 import InputField from "./InputField";
-import { FrameImageMetadata } from "@coinbase/onchainkit";
 import { MenuItem, Select } from "@mui/material";
 import { useProductJourney } from "~~/providers/ProductProvider";
 
 const FrameEditor = () => {
-  const { frame: dbFrame } = useProductJourney();
-  const frame = dbFrame?.frameJson;
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [additionalInput, setAdditionalInput] = useState<string>("");
-
+  const { currentFrame, setCurrentFrame } = useProductJourney();
   const [imageUrlOption, setImageUrlOption] = useState("url");
-
-  useEffect(() => {
-    if (!frame) return;
-    setImageUrl((frame.image as FrameImageMetadata).src as string);
-    setAdditionalInput(frame.input?.text as string);
-  }, [frame]);
-
+  if (!currentFrame) return null;
   return (
     <div className="p-6 h-[100vh] bg-white rounded-md shadow-md flex flex-col gap-4">
       <label htmlFor="imageInput" className="block text-sm font-medium text-gray-700">
@@ -29,7 +18,6 @@ const FrameEditor = () => {
         value={imageUrlOption}
         onChange={e => {
           setImageUrlOption(e.target.value);
-          setImageUrl(""); // Clear the input box value when the dropdown selection changes
         }}
         variant="outlined"
       >
@@ -39,15 +27,33 @@ const FrameEditor = () => {
       <InputField
         id="imageUrl"
         label={imageUrlOption === "url" ? "Enter Image URL" : "Enter HTML Code"}
-        value={imageUrl}
-        onChange={setImageUrl}
+        // @ts-ignore
+        value={currentFrame?.image?.src || ""}
+        onChange={value => {
+          setCurrentFrame({
+            ...currentFrame,
+            image: {
+              // @ts-ignore
+              ...currentFrame?.image,
+              src: value,
+            },
+          });
+        }}
         placeholder={imageUrlOption === "url" ? "Image URL" : "HTML Code"}
       />
       <InputField
         id="additionalInput"
         label="Enter Additional Input"
-        value={additionalInput}
-        onChange={setAdditionalInput}
+        value={currentFrame?.input?.text || ""}
+        onChange={value => {
+          setCurrentFrame({
+            ...currentFrame,
+            input: {
+              ...currentFrame?.input,
+              text: value,
+            },
+          });
+        }}
         placeholder="Additional Input"
       />
       <ButtonList />

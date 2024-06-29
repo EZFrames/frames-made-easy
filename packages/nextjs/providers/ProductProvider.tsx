@@ -13,7 +13,9 @@ interface IProductJourney {
   frame: Frame | null;
   setFrame: (frame: Frame) => void;
   journey: Journey | null;
-  frames: FrameMetadataType[] | undefined;
+  frames: string[] | undefined;
+  setCurrentFrame: (frame: FrameMetadataType) => void;
+  currentFrame: FrameMetadataType | null;
 }
 
 const ProductJourney = createContext<IProductJourney | null>(null);
@@ -29,13 +31,9 @@ const useProduct = () => {
     name: "",
     frameJson: DEFAULT_FRAME,
   });
-
+  const [currentFrame, setCurrentFrame] = useState<FrameMetadataType | null>(null);
   const frames = useMemo(() => {
-    return journey?.frames.map(frame => {
-      getFrameById(frame).then(frame => {
-        return frame;
-      });
-    });
+    return journey?.frames;
   }, [journey]);
 
   const productQuery = useQuery({
@@ -75,6 +73,7 @@ const useProduct = () => {
     console.log(productQuery.data);
     getFrameById(productQuery.data.frames[0]).then(frame => {
       setFrame(frame);
+      setCurrentFrame(frame.frameJson);
     });
   }, [productQuery.data]);
 
@@ -84,6 +83,8 @@ const useProduct = () => {
     updateProduct,
     frame,
     setFrame,
+    currentFrame,
+    setCurrentFrame,
     journey,
     frames,
   };

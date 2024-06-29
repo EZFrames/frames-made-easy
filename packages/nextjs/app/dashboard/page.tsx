@@ -5,12 +5,13 @@ import type { NextPage } from "next";
 import ProductCard, { cardData } from "~~/components/ProductCard";
 import ProductModal from "~~/components/ProductModal";
 import ShopifyModal from "~~/components/ShopifyModal";
+import { Journey } from "~~/types/commontypes";
 
 const Dashboard: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [shopify, setShopify] = useState(false);
+  const [products, setProducts] = useState([]);
   const getAllProducts = async () => {
-    console.log("Fetching all products");
     try {
       const response = await fetch(`/api/journey`, {
         method: "GET",
@@ -22,8 +23,7 @@ const Dashboard: NextPage = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data);
-      return response.json();
+      return data;
     } catch (error: any) {
       console.error(error);
       throw new Error(error.message);
@@ -31,8 +31,10 @@ const Dashboard: NextPage = () => {
   };
 
   useEffect(() => {
-    getAllProducts();
-  });
+    getAllProducts().then(data => {
+      setProducts(data);
+    });
+  }, []);
   return (
     <div className="flex items-center flex-col flex-grow pt-10">
       <div className="flex justify-end my-2 gap-4">
@@ -55,13 +57,13 @@ const Dashboard: NextPage = () => {
       </div>
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
-          {cardData.map((journey: any) => (
+          {products.map((journey: Journey) => (
             <ProductCard
-              key={journey.key}
-              id={journey.id}
+              key={journey._id}
+              id={journey._id}
               name={journey.name}
-              image={journey.image}
-              description={journey.desc}
+              image={journey.image as string}
+              description={journey.desc as string}
             />
           ))}
         </div>

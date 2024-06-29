@@ -6,7 +6,7 @@ import path from "path";
 import { html } from "satori-html";
 import satori from "satori/wasm";
 
-const robotoArrayBuffer = fs.readFileSync(path.resolve(process.cwd(), "public/fonts/roboto.ttf"));
+const robotoArrayBuffer = fs.readFileSync(path.resolve(process.cwd(), "public/roboto.ttf"));
 
 const createImageFromHtml = async (HTML: string) => {
   const markup = html`${HTML}`;

@@ -1,15 +1,14 @@
 import { useProductJourney } from "~~/providers/ProductProvider";
 
 function FrameRender() {
-  const { frame: dbFrame } = useProductJourney();
-  const frame = dbFrame?.frameJson;
-  if (!frame) return null;
+  const { currentFrame } = useProductJourney();
+  if (!currentFrame) return null;
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         // @ts-ignore
-        src={frame.image?.src as string}
+        src={currentFrame.image?.src as string}
         alt="Description of the image"
         style={{
           borderRadius: "4px",
@@ -18,11 +17,11 @@ function FrameRender() {
           height: "40vh", // Maintain aspect ratio
         }}
       />
-      {frame.input?.text && (
+      {currentFrame.input?.text && (
         <input
           className="w-full p-2 border mt-1 border-gray-400 rounded bg-white" // Set background color to white
           type="text"
-          placeholder={frame.input.text}
+          placeholder={currentFrame.input.text}
         />
       )}
       <div
@@ -33,7 +32,7 @@ function FrameRender() {
           gap: "4px",
         }}
       >
-        {frame.buttons?.map(({ label, action }, index: number) => (
+        {currentFrame.buttons?.map(({ label, action }, index: number) => (
           <button
             type="button"
             className={`bg-gray-200 p-1 hover:bg-gray-300 `}
