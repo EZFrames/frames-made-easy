@@ -34,6 +34,8 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
+    "satori": "^0.10.13",
+    "satori-html": "^0.3.2",
     "use-debounce": "^8.0.4",
     "usehooks-ts": "^2.13.0",
     "uuidv4": "^6.2.13",

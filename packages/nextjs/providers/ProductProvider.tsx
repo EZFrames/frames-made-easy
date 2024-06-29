@@ -1,8 +1,10 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
+import { FrameMetadataType } from "@coinbase/onchainkit";
 import { UseMutationResult, UseQueryResult, useMutation, useQuery } from "@tanstack/react-query";
-import { Frame, Journey } from "~~/types/commontypes";
+import { DEFAULT_FRAME } from "~~/constants";
 import { getFrameById } from "~~/services/frames";
+import { Frame, Journey } from "~~/types/commontypes";
 
 interface IProductJourney {
   productID: string;
@@ -11,6 +13,7 @@ interface IProductJourney {
   frame: Frame | null;
   setFrame: (frame: Frame) => void;
   journey: Journey | null;
+  frames: FrameMetadataType[] | undefined;
 }
 
 const ProductJourney = createContext<IProductJourney | null>(null);
@@ -24,9 +27,16 @@ const useProduct = () => {
   const [frame, setFrame] = useState<Frame | null>({
     _id: "",
     name: "",
-    frameJson: getFrameById(1),
+    frameJson: DEFAULT_FRAME,
   });
 
+  const frames = useMemo(() => {
+    return journey?.frames.map(frame => {
+      getFrameById(frame).then(frame => {
+        return frame;
+      });
+    });
+  }, [journey]);
 
   const productQuery = useQuery({
     queryKey: ["product", productID],
@@ -62,7 +72,10 @@ const useProduct = () => {
   useEffect(() => {
     if (!productQuery.data) return;
     setJourney(productQuery.data);
-    setFrame(productQuery.data.frames[0]);
+    console.log(productQuery.data);
+    getFrameById(productQuery.data.frames[0]).then(frame => {
+      setFrame(frame);
+    });
   }, [productQuery.data]);
 
   return {
@@ -72,6 +85,7 @@ const useProduct = () => {
     frame,
     setFrame,
     journey,
+    frames,
   };
 };
 

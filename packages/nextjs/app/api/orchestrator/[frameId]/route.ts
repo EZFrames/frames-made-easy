@@ -30,7 +30,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     [`${frameId}ButtonPressed`]: body.untrustedData.buttonIndex,
     [`${frameId}InputtedText`]: body.untrustedData.inputText,
   };
-  const nextFrame = getFrameById(1);
+  const nextFrame = await getFrameById(frameId);
   nextFrame.state = {
     ...stateUpdate,
   };

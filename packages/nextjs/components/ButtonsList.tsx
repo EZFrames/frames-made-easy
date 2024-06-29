@@ -9,9 +9,12 @@ import { notification } from "~~/utils/scaffold-eth";
 const ButtonList = () => {
   const { frame: dbFrame } = useProductJourney();
   const frame = dbFrame?.frameJson as FrameMetadataType;
+  console.log(frame);
+
   const [buttons, setButtons] = useState<FrameButtonMetadata[]>([{ label: "Button 1" }]);
   const [activeButtonIndex, setActiveButtonIndex] = useState<number | null>(0);
   useEffect(() => {
+    if (!frame) return;
     setButtons(frame.buttons || [{ label: "Button 1" }]);
   }, [frame]);
 

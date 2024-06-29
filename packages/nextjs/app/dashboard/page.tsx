@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import ProductCard, { cardData } from "~~/components/ProductCard";
 import ProductModal from "~~/components/ProductModal";
@@ -9,6 +9,30 @@ import ShopifyModal from "~~/components/ShopifyModal";
 const Dashboard: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [shopify, setShopify] = useState(false);
+  const getAllProducts = async () => {
+    console.log("Fetching all products");
+    try {
+      const response = await fetch(`/api/journey`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log(data);
+      return response.json();
+    } catch (error: any) {
+      console.error(error);
+      throw new Error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllProducts();
+  });
   return (
     <div className="flex items-center flex-col flex-grow pt-10">
       <div className="flex justify-end my-2 gap-4">

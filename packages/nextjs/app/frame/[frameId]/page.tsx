@@ -3,7 +3,7 @@ import { getFrameById } from "~~/services/frames";
 
 export async function generateMetadata({ params }: any) {
   const frameId = params.frameId;
-  const frame = getFrameById(frameId);
+  const frame = await getFrameById(frameId);
   return {
     title: "Frames Made by Frames made easy!",
     other: {
