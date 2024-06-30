@@ -2,63 +2,68 @@ import { FrameMetadataType } from "@coinbase/onchainkit";
 import { Abi } from "viem";
 
 export const APP_URL = "http://localhost:3000";
+
 export const txFrame = {
   buttons: [
     {
       action: "tx",
       label: "purchase",
-      postUrl: `${APP_URL}/frame/tx`,
-      target: "",
+      postUrl: `${APP_URL}/api/orchestrator/tx`,
+      target: `${APP_URL}/api/orchestrator/tx`,
     },
   ],
   image: {
-    src: `https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png`,
+    src: `https://amber-causal-cougar-937.mypinata.cloud/ipfs/QmcGop9sCSmcNktWcRXsokE9wjjcWqLhhMhWL3CywkqGXZ`,
+  },
+  input: {
+    text: "Enter No of items",
   },
 } as FrameMetadataType;
+
 export const emailFrame = {
   buttons: [
     {
       action: "post",
-      label: "Dog pictures",
-      target: ``,
+      label: "Generate Receipt",
+      target: "",
     },
   ],
   image: {
-    src: `https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png`,
+    src: `https://amber-causal-cougar-937.mypinata.cloud/ipfs/QmcGop9sCSmcNktWcRXsokE9wjjcWqLhhMhWL3CywkqGXZ`,
   },
   input: {
-    text: "Type here",
+    text: "Enter your email",
   },
 } as FrameMetadataType;
 
 export const DEFAULT_FRAME: FrameMetadataType = {
-  buttons: [
-    {
-      action: "post",
-      target: "http://localhost:3000/api/orchestrator/1",
-      label: "Home 1",
-    },
-    {
-      action: "link",
-      label: "OnchainKit",
-      target: "https://onchainkit.xyz",
-    },
-    {
-      action: "post_redirect",
-      label: "Dog pictures",
-    },
-  ],
-  image: {
-    src: "https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png",
+  ttons: [
+    
+    action: "post",
+    target: "http://localhost:3000/api/orchestrator/1",
+    label: "Home 1",
   },
-  state: {
-    time: "2024-06-28T16:14:14.986Z",
-    journey_id: "1",
-    frame_id: "2",
+    
+    action: "link",
+    label: "OnchainKit",
+    target: "https://onchainkit.xyz",
   },
-  input: {
-    text: "Type here",
-  },
+    
+    action: "post_redirect",
+label: "Dog pictures",
+},
+    ],
+      age: {
+      src: "https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png",
+    },
+      ate: {
+      time: "2024-06-28T16:14:14.986Z",
+      journey_id: "1",
+      frame_id: "2",
+    },
+      put: {
+      text: "Type here",
+      },
 };
 
 export const ABI: Abi = [
