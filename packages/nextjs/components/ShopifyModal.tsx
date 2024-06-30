@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { createJourney } from "~~/services/frames";
 import { getShopifyProducts } from "~~/services/shopify/fetchProducts";
+import { notification } from "~~/utils/scaffold-eth";
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,8 +20,54 @@ const ShopifyModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   };
 
   const onAddButton = async () => {
-    const products = await getShopifyProducts(storeName, apiKey);
-    console.log(products);
+    try {
+      const response = await fetch(`/api/shopify/products`, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify({
+          storeName,
+          apiKey,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+
+      const products = await response.json();
+      if (!products || products.length === 0) {
+        notification.error("No products found");
+        return;
+      }
+
+      const createJourneyPromises = products.map((product: any) => {
+        const { title, image, body_html, variants } = product;
+        const variant = variants[0];
+        console.log({ title, image: image.src, body_html, price: variant.price, productId: variant.product_id });
+
+        return createJourney({
+          name: title,
+          price: variant.price,
+          desc: body_html,
+          image: image.src,
+          quantity: 10,
+        })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.error(`Error creating journey for product ${title}:`, error);
+          });
+      });
+
+      await Promise.all(createJourneyPromises);
+      console.log("All createJourney calls completed");
+    } catch (error) {
+      console.error("Error in onAddButton:", error);
+      notification.error("An error occurred while adding products");
+    }
   };
   return (
     <Dialog open={isOpen} onClose={handleClose} className="fixed z-50 overflow-y-auto w-[100%]">
