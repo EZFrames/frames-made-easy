@@ -102,7 +102,8 @@ export const AddressInfoDropdown = ({
           <li className={selectingNetwork ? "hidden" : ""}>
             <label htmlFor="qrcode-modal" className="btn-sm !rounded-xl flex gap-3 py-3">
               <QrCodeIcon className="h-6 w-4 ml-2 sm:ml-0" />
-              <span className="whitespace-nowrap">View QR Code</span>
+              <a href="https://keys.coinbase.com/settings/receive">
+              View QR Code</a>
             </label>
           </li>
           <li className={selectingNetwork ? "hidden" : ""}>
@@ -123,7 +124,7 @@ export const AddressInfoDropdown = ({
               <button
                 className="btn-sm !rounded-xl flex gap-3 py-3"
                 type="button"
-                onClick={() => {
+                onClick={() => {yarn 
                   setSelectingNetwork(true);
                 }}
               >
