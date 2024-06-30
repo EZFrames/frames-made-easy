@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { FrameRequest, getFrameHtmlResponse } from "@coinbase/onchainkit";
+import { APP_URL } from "~~/constants";
 import Analytics from "~~/model/analytics";
 import connectDB from "~~/services/connectDB";
-import { getFrameById } from "~~/services/frames";
+import { getFrameAtServer } from "~~/services/frames";
 
 const storeAnalytics = async (body: FrameRequest, state: any) => {
   const analyticsEntry = new Analytics({
@@ -18,10 +19,11 @@ const storeAnalytics = async (body: FrameRequest, state: any) => {
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   await connectDB();
-  const body: FrameRequest = await req.json();
+  const url = req.nextUrl.pathname;
+  const frameId = url.replace(`/api/orchestrator`, "");
+  const body = await req.json();
   const state = JSON.parse(decodeURIComponent(body.untrustedData.state as string));
-  const frameId = state?.frameId;
-  console.log(state);
+
   // Creating Analytics for the frame asynchronously
   storeAnalytics(body, state).catch(err => console.error("Error Saving Analytics", err));
   // Adding State for Button Press and Inputted Text on last frame
@@ -30,7 +32,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     [`${frameId}ButtonPressed`]: body.untrustedData.buttonIndex,
     [`${frameId}InputtedText`]: body.untrustedData.inputText,
   };
-  const nextFrame = await getFrameById(frameId);
+  const dbFrame = await getFrameAtServer(frameId);
+  if (!dbFrame) {
+    return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
+  }
+  const nextFrame = dbFrame.frameJson;
   nextFrame.state = {
     ...stateUpdate,
   };

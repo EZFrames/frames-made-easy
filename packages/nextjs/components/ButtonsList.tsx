@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ButtonEditor from "./ButtonEditor";
+import FarcasterModal from "./FarcasterModal";
 import { FrameButtonMetadata, FrameMetadataType } from "@coinbase/onchainkit";
 import { IconButton } from "@mui/material";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -9,7 +10,7 @@ import { notification } from "~~/utils/scaffold-eth";
 const ButtonList = () => {
   const { currentFrame, setCurrentFrame, frame, saveFrame, deleteFrame } = useProductJourney();
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
-
+  const [open, setOpen] = useState(false);
   if (!currentFrame) return null;
   const handleAddButton = () => {
     // @ts-ignore
@@ -32,6 +33,7 @@ const ButtonList = () => {
 
   const handleSaveFrame = async () => {
     notification.info("Frame saved successfully");
+    console.log(frame.name);
     await saveFrame.mutateAsync({
       _id: frame?._id as string,
       name: frame?.name as string,
@@ -104,7 +106,11 @@ const ButtonList = () => {
         <button onClick={handleSaveFrame} className="btn btn-success  mt-2 flex items-center justify-center">
           Save Frame
         </button>
+        <button onClick={() => setOpen(!open)} className="btn btn-primary mt-2 flex items-center justify-center">
+          Export Product
+        </button>
       </div>
+      {open && <FarcasterModal isOpen={open} onClose={() => setOpen(false)} />}
     </div>
   );
 };

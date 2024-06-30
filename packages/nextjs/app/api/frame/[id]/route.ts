@@ -6,6 +6,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   await connectDB();
   const frame_id = params.id;
   const frame = await Frame.findById(frame_id);
+  console.log(frame);
   if (!frame) {
     return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
   }
@@ -16,10 +17,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   await connectDB();
   const frame_id = params.id;
   const payload = await req.json();
-
-  const { frameJson } = payload;
-  console.log({ frameJson });
-  const frame = await Frame.findByIdAndUpdate(frame_id, { frameJson }, { new: true });
+  const frame = await Frame.findByIdAndUpdate(frame_id, payload, { new: true });
   if (!frame) {
     return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
   }

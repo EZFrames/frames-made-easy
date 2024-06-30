@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import InputField from "./InputField";
 import { FrameButtonMetadata } from "@coinbase/onchainkit";
-import { IconButton, MenuItem, Select } from "@mui/material";
+import { IconButton, MenuItem, Select, TextField } from "@mui/material";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { useProductJourney } from "~~/providers/ProductProvider";
-import { getFrameById } from "~~/services/frames";
-import { Frame } from "~~/types/commontypes";
 import { APP_URL } from "~~/constants";
+import { useProductJourney } from "~~/providers/ProductProvider";
+import { getFrameById, removeUrl } from "~~/services/frames";
+import { Frame } from "~~/types/commontypes";
 
 interface ButtonEditorProps {
   button: FrameButtonMetadata;
@@ -15,7 +15,7 @@ interface ButtonEditorProps {
 }
 
 const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
-  const { frames: dbFrames } = useProductJourney();
+  const { frames: dbFrames, frame } = useProductJourney();
   const [frames, setFrames] = useState<Frame[] | undefined>();
 
   useEffect(() => {
@@ -46,6 +46,7 @@ const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
       <Select
         id="buttonAction"
         value={button.action}
+        // @ts-ignore
         onChange={e => onSave({ ...button, action: e.target.value as FrameButtonMetadata["action"] })}
         variant="outlined"
       >
@@ -57,16 +58,53 @@ const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
       {button.action === "post" && (
         <Select
           id="post"
-          value={button.target}
-          onChange={e => onSave({ ...button, target: `${APP_URL}`+e.target.value as FrameButtonMetadata["target"] })}
+          value={removeUrl(button.target as string)}
+          onChange={e =>
+            onSave({ ...button, target: (`${APP_URL}/api/orchestrator/` + e.target.value) as FrameButtonMetadata["target"] })
+          }
           variant="outlined"
         >
-          {frames?.map((frame, index) => (
-            <MenuItem key={index} value={frame._id}>
-              {frame.name}
-            </MenuItem>
-          ))}
+          {frames?.map(
+            (f, index) =>
+              f._id !== frame?._id && (
+                <MenuItem key={index} value={f._id}>
+                  {f.name}
+                </MenuItem>
+              ),
+          )}
         </Select>
+      )}
+      {button.action === "link" && (
+        <TextField
+          id="link"
+          label="Enter Link"
+          variant="outlined"
+          value={button.target}
+          onChange={e => onSave({ ...button, target: e.target.value })}
+          fullWidth
+        />
+      )}
+      {button.action === "tx" && (
+        <>
+          <Select
+            id="post"
+            value={button.target}
+            onChange={e =>
+              onSave({ ...button, postUrl: `${APP_URL}/api/orchestrator/` + e.target.value, target: `${APP_URL}/api/tx` })
+            }
+            variant="outlined"
+          >
+            {frames?.map((f, index) => (
+              <>
+                {f._id !== frame?._id && (
+                  <MenuItem key={index} value={f._id}>
+                    {f.name}
+                  </MenuItem>
+                )}
+              </>
+            ))}
+          </Select>
+        </>
       )}
     </div>
   );

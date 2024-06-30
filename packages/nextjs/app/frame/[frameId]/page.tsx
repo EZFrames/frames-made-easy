@@ -1,17 +1,32 @@
 import { FrameMetadataType, getFrameMetadata } from "@coinbase/onchainkit";
-import { getFrameById } from "~~/services/frames";
+import { Metadata } from "next";
+import { APP_URL } from "~~/constants";
 
-export async function generateMetadata({ params }: any) {
-  const frameId = params.frameId;
-  const frame = await getFrameById(frameId);
-  return {
-    title: "Frames Made by Frames made easy!",
-    other: {
-      ...getFrameMetadata(frame as FrameMetadataType),
-    },
-  };
+type Props = {
+  params: { frameId: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const id = params.frameId;
+
+  try {
+    const response = await fetch(`${APP_URL}/api/frame/${id}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return {
+      title: "Frames Made by Frames made easy!",
+      description: "Frames Made by Frames made easy!",
+      other: {
+        ...getFrameMetadata(data.frameJson as FrameMetadataType),
+      },
+    };
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 }
-
 export default function Page() {
   return (
     <>

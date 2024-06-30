@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ButtonList from "./ButtonsList";
+import FarcasterModal from "./FarcasterModal";
 import InputField from "./InputField";
-import { MenuItem, Select } from "@mui/material";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { useProductJourney } from "~~/providers/ProductProvider";
 
 const FrameEditor = () => {
-  const { currentFrame, setCurrentFrame } = useProductJourney();
+  const { frame, setFrame, currentFrame, setCurrentFrame } = useProductJourney();
   const [imageUrlOption, setImageUrlOption] = useState("url");
   const [htmlInput, setHtmlInput] = useState("");
   const [imageUrl, setImageUrl] = useState(currentFrame?.image?.src || "");
-
+  const [open, setOpen] = useState(false);
   const getImageResponse = async (html: string) => {
     const response = await fetch(`/api/imageGeneration`, {
       body: JSON.stringify({ html }),
@@ -57,6 +58,20 @@ const FrameEditor = () => {
   if (!currentFrame) return null;
   return (
     <div className="bg-white flex flex-col gap-4 p-4">
+            <TextField
+        id="outlined-basic"
+        label="Frame Name"
+        variant="outlined"
+        value={frame?.name}
+        fullWidth
+        onChange={e => {
+          if (!frame) return;
+          setFrame({
+            ...frame,
+            name: e.target.value,
+          });
+        }}
+      />
       <label htmlFor="imageInput" className="block text-sm font-medium text-gray-700">
         Image/HTML{" "}
       </label>

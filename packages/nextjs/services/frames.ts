@@ -1,4 +1,4 @@
-import { DEFAULT_FRAME } from "~~/constants";
+import { APP_URL, DEFAULT_FRAME } from "~~/constants";
 import { Frame, Journey } from "~~/types/commontypes";
 
 export const getFrameById = async (id: string) => {
@@ -10,10 +10,29 @@ export const getFrameById = async (id: string) => {
     const data = await response.json();
     return data;
   } catch (error: any) {
+    console.log(error);
     throw new Error(error.message);
   }
 };
 
+export const getFrameAtServer = async (id: string) => {
+  try {
+    const response = await fetch(`${APP_URL}/api/frame/${id}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+export const removeUrl = (url: string) => {
+  if (!url) return "";
+  return url.replace(`${APP_URL}/api/orchestrator/`, "");
+};
 export const createFrame = async (frame: Omit<Frame, "_id">) => {
   try {
     const response = await fetch(`/api/frame`, {

@@ -1,9 +1,6 @@
 import { FrameMetadataType } from "@coinbase/onchainkit";
-import { ButtonProps } from "@mui/material";
 
-export const APP_URL = "https://cd4d-103-216-213-71.ngrok-free.app";
-// test using ${APP_URL}/frame/${frameID}
-//
+export const APP_URL = "https://950a-103-216-213-71.ngrok-free.app";
 export const txFrame = {
   buttons: [
     {
