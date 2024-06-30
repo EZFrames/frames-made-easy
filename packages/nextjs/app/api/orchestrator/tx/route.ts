@@ -9,7 +9,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<FrameTransact
   const callData = encodeFunctionData({
     abi: ABI,
     functionName: "trf",
-    args: [myAddress, parseEther("5"), BigInt(untrustedData.inputText || 1)],
+    args: [myAddress, parseEther("5"), BigInt(untrustedData?.inputText || 1)],
   });
   return NextResponse.json({
     chainId: "eip155:84532",
