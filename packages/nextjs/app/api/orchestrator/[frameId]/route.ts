@@ -57,6 +57,11 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const frameId = url.replace(`/api/orchestrator`, "");
   const body = await req.json();
   console.log("body", body);
+  if (body.untrustedData?.buttonIndex != "") {
+    const txnId = body.untrustedData?.transactionId;
+    const attestation = await createAttestation(txnId);
+    return new NextResponse(JSON.stringify({ message: "Attestation Created", attestation }), { status: 200 });
+  }
   const state = JSON.parse(decodeURIComponent(body.untrustedData?.state as string));
   let stateUpdate
   if (state) {
