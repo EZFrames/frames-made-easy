@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import ButtonEditor from "./ButtonEditor";
 import FarcasterModal from "./FarcasterModal";
 import { FrameButtonMetadata, FrameMetadataType } from "@coinbase/onchainkit";
@@ -8,7 +9,8 @@ import { useProductJourney } from "~~/providers/ProductProvider";
 import { notification } from "~~/utils/scaffold-eth";
 
 const ButtonList = () => {
-  const { currentFrame, setCurrentFrame, frame, saveFrame, deleteFrame } = useProductJourney();
+  const router = useRouter();
+  const { currentFrame, setCurrentFrame, frame, saveFrame, deleteFrame,journey } = useProductJourney();
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
   const [open, setOpen] = useState(false);
   if (!currentFrame) return null;
@@ -33,7 +35,6 @@ const ButtonList = () => {
 
   const handleSaveFrame = async () => {
     notification.info("Frame saved successfully");
-    console.log(frame.name);
     await saveFrame.mutateAsync({
       _id: frame?._id as string,
       name: frame?.name as string,

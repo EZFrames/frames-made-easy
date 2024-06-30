@@ -102,7 +102,7 @@ const useProduct = () => {
 
   const saveFrame = useMutation({
     mutationFn: async (frame: Frame) => {
-      console.log({frame})
+      console.log({ frame })
       const response = await fetch(`/api/frame/${frame._id}`, {
         method: "PUT",
         headers: {
