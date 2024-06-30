@@ -1,5 +1,6 @@
 import { APP_URL, DEFAULT_FRAME } from "~~/constants";
 import { Frame, Journey } from "~~/types/commontypes";
+import { GetDefaultFrame } from "./frames/frameGetters";
 
 export const getFrameById = async (id: string) => {
   try {
@@ -52,11 +53,6 @@ export const createFrame = async (frame: Omit<Frame, "_id">) => {
 };
 
 export const createJourney = async (journey: Partial<Journey>) => {
-  const frame = await createFrame({
-    frameJson: DEFAULT_FRAME,
-    name: "Frame 1",
-  });
-  journey.frames = [frame._id];
   try {
     const response = await fetch(`/api/journey`, {
       method: "POST",
@@ -67,7 +63,7 @@ export const createJourney = async (journey: Partial<Journey>) => {
     });
     if (!response.ok) {
       throw new Error("Network response was not ok");
-    }
+    };
     return response.json();
   } catch (error: any) {
     console.error(error);

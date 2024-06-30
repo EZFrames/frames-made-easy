@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { DEFAULT_FRAME } from "~~/constants";
 import { useProductJourney } from "~~/providers/ProductProvider";
 import { getFrameById } from "~~/services/frames";
+import { GetDefaultFrame } from "~~/services/frames/frameGetters";
 import { Frame } from "~~/types/commontypes";
 
 const thumbnailImageStyle = {
@@ -35,7 +35,7 @@ const thumbnailActiveStyle = {
   backgroundColor: "#c0c0c0",
 };
 function FrameSidebar() {
-  const { productQuery, frame, setFrame, setCurrentFrame, createFrame } = useProductJourney();
+  const { productQuery, productID, frame, setFrame, setCurrentFrame, createFrame } = useProductJourney();
   const [frames, setFrames] = useState<Frame[] | undefined>(undefined);
   const [currentFrameId, setCurrentFrameId] = useState<string>(frame?._id as string);
   useEffect(() => {
@@ -53,7 +53,7 @@ function FrameSidebar() {
   const onCreate = async () => {
     await createFrame.mutateAsync({
       name: "Frame",
-      frameJson: DEFAULT_FRAME,
+      frameJson: await GetDefaultFrame(productID),
     });
   };
   if (!frames) return null;

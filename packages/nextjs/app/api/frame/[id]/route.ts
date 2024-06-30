@@ -6,7 +6,6 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   await connectDB();
   const frame_id = params.id;
   const frame = await Frame.findById(frame_id);
-  console.log(frame);
   if (!frame) {
     return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
   }

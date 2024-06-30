@@ -11,7 +11,6 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   await connectDB();
   const payload = await req.json();
-  console.log(payload);
   const journey = new Journey(payload);
   await journey.save();
   return new NextResponse(JSON.stringify(journey));

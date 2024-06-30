@@ -13,17 +13,16 @@ export const getUniqueUsers = async (startDate: string, endDate: string, journey
   if (journeyId !== "") {
     queryparams = `?startDate=${startDate}&endDate=${endDate}&journeyId=${journeyId}`;
   }
-  console.log("Query", queryparams);
   const res = await fetch(`/api/analytics/unique_fids` + queryparams);
   const data = await res.json();
+  console.log("unique", data);
   return data.uniqueFids;
 };
 
-export const getTop5Frames = async (startDate: string, endDate: string) => {
+export const getTop5Journeys = async (startDate: string, endDate: string) => {
   const queryparams = "?startDate=" + startDate + "&endDate=" + endDate;
-  const res = await fetch(`/api/analytics/top5frames` + queryparams);
+  const res = await fetch(`/api/analytics/top5journeys` + queryparams);
   const data = await res.json();
-  console.log(data);
   return data;
 };
 

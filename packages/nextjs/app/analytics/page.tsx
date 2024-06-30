@@ -11,13 +11,20 @@ import {
   ListItem,
   ListItemText,
   MenuItem,
+  Paper,
   Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
   Typography,
 } from "@mui/material";
 import LineChart from "~~/components/analytics/LineChart";
 import {
-  getTop5Frames,
+  getTop5Journeys,
   getTotalInteractions,
   getTotalInteractionsGraph,
   getUniqueUsers,
@@ -28,7 +35,7 @@ const AnalyticsPage = () => {
   const [journeyId, setJourneyId] = useState("");
   const [totalInteractions, setTotalInteractions] = useState<number>();
   const [uniqueInteractions, setUniqueInteractions] = useState<number>();
-  const [top5Frames, setTop5Frames] = useState<any[]>([]);
+  const [top5Journeys, settop5Journeys] = useState<any[]>([]);
   const [totalInteractionsGraph, setTotalInteractionsGraph] = useState<any[]>([]);
 
   const formatDate = (date: Date) => {
@@ -37,6 +44,35 @@ const AnalyticsPage = () => {
     const year = date.getFullYear();
     return `${month}-${day}-${year}`;
   };
+  useEffect(() => {
+    const getDateRange = () => {
+      const today = new Date();
+      const actualToday = new Date(today.getDate() + 1);
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+      const lastWeek = new Date(today);
+      lastWeek.setDate(today.getDate() - 7);
+      const lastMonth = new Date(today);
+      lastMonth.setMonth(today.getMonth() - 1);
+      switch (dateRange) {
+        case "last-day":
+          return { start: formatDate(yesterday), end: formatDate(actualToday) };
+        case "last-7-days":
+          return { start: formatDate(lastWeek), end: formatDate(actualToday) };
+        case "last-30-days":
+          return { start: formatDate(lastMonth), end: formatDate(actualToday) };
+        default:
+          return { start: formatDate(lastWeek), end: formatDate(actualToday) };
+      }
+    };
+    const { start, end } = getDateRange();
+    getTotalInteractions(start, end, journeyId).then(data => setTotalInteractions(data));
+    getUniqueUsers(start, end, journeyId).then(data => setUniqueInteractions(data));
+    getTotalInteractionsGraph(start, end, journeyId).then(data => {
+      setTotalInteractionsGraph(data);
+    });
+  }, [dateRange, journeyId]);
+
   useEffect(() => {
     const getDateRange = () => {
       const today = new Date();
@@ -58,11 +94,8 @@ const AnalyticsPage = () => {
       }
     };
     const { start, end } = getDateRange();
-    getTotalInteractions(start, end, journeyId).then(data => setTotalInteractions(data));
-    getUniqueUsers(start, end, journeyId).then(data => setUniqueInteractions(data));
-    getTop5Frames(start, end).then((data: any[]) => setTop5Frames(data));
-    getTotalInteractionsGraph(start, end, journeyId).then(data => setTotalInteractionsGraph(data));
-  }, [dateRange, journeyId]);
+    getTop5Journeys(start, end).then((data: any[]) => settop5Journeys(data));
+  }, [dateRange]);
 
   return (
     <Container>
@@ -107,32 +140,34 @@ const AnalyticsPage = () => {
         </Box>
         <Box sx={{ my: 4 }}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
-            Top 5 Frames
+            Top 5 Journeys
           </Typography>
-          <List>
-            <ListItem key={0}>
-              <ListItemText
-                primary={
-                  <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
-                    Frame ID
-                  </Typography>
-                }
-              />
-              <ListItemText
-                primary={
-                  <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
-                    Count
-                  </Typography>
-                }
-              />
-            </ListItem>
-            {top5Frames.map((frame, index) => (
-              <ListItem key={index}>
-                <ListItemText primary={frame._id} />
-                <ListItemText primary={frame.count} />
-              </ListItem>
-            ))}
-          </List>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      Journey Name
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      Interactions
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {top5Journeys.map((frame, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{frame.journeyName}</TableCell>
+                    <TableCell>{frame.count}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Box>
       </Box>
     </Container>
