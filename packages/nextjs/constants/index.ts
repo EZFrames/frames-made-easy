@@ -17,6 +17,7 @@ export const txFrame = {
   input: {
     text: "Enter No of items",
   },
+  state: {},
 } as FrameMetadataType;
 
 export const emailFrame = {

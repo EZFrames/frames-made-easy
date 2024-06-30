@@ -1,5 +1,6 @@
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { ethers } from "ethers";
+import { initJourneyWithFrames } from "./frames/initScript";
 import { APP_URL } from "~~/constants";
 import { Frame, Journey } from "~~/types/commontypes";
 
@@ -35,6 +36,7 @@ export const removeUrl = (url: string) => {
   if (!url) return "";
   return url.replace(`${APP_URL}/api/orchestrator/`, "");
 };
+
 export const createFrame = async (frame: Omit<Frame, "_id">) => {
   try {
     const response = await fetch(`/api/frame`, {
@@ -65,7 +67,14 @@ export const createJourney = async (journey: Partial<Journey>) => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    return response.json();
+    const data = await response.json();
+    const newJourney = await initJourneyWithFrames(
+      data._id as string,
+      journey.price as string,
+      journey.desc as string,
+      journey.image as string,
+    );
+    return newJourney;
   } catch (error: any) {
     console.error(error);
     throw new Error(error.message);
@@ -122,3 +131,21 @@ export async function createAttestation(txnId: string) {
   console.log("attestation", attestation);
   return attestation;
 }
+export const saveJourney = async (journey: Partial<Journey>) => {
+  try {
+    const response = await fetch(`/api/journey/${journey._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(journey),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  } catch (error: any) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+};

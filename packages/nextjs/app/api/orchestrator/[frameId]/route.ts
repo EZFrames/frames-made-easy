@@ -33,31 +33,30 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     const attestation = await createAttestation(txnId);
     console.log("attestation", attestation);
   }
-  // const state = JSON.parse(decodeURIComponent(body.untrustedData?.state as string));
-  // let stateUpdate
-  // if (state) {
-  //   console.log("state", state);
-  //   // Creating Analytics for the frame asynchronously
-  //   storeAnalytics(body, state).catch(err => console.error("Error Saving Analytics", err));
-  //   // Adding State for Button Press and Inputted Text on last frame
-  //   state.frame_id = frameId;
-  //   stateUpdate = {
-  //     ...state,
-  //     [`${frameId}ButtonPressed`]: body.untrustedData.buttonIndex,
-  //     [`${frameId}InputtedText`]: body.untrustedData.inputText,
-  //   };
-  // }
+  const state = JSON.parse(decodeURIComponent(body.untrustedData?.state as string));
+  let stateUpdate;
+  if (state) {
+    // Creating Analytics for the frame asynchronously
+    storeAnalytics(body, state).catch(err => console.error("Error Saving Analytics", err));
+    // Adding State for Button Press and Inputted Text on last frame
+    state.frame_id = frameId;
+    stateUpdate = {
+      ...state,
+      [`${frameId}ButtonPressed`]: body.untrustedData.buttonIndex,
+      [`${frameId}InputtedText`]: body.untrustedData.inputText,
+    };
+  }
 
   const dbFrame = await getFrameAtServer(frameId);
   if (!dbFrame) {
     return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
   }
   const nextFrame = dbFrame.frameJson;
-  // if (state) {
-  //   nextFrame.state = {
-  //     ...stateUpdate
-  //   };
-  // }
+  if (state) {
+    nextFrame.state = {
+      ...stateUpdate,
+    };
+  }
 
   return new NextResponse(getFrameHtmlResponse(nextFrame));
 }
