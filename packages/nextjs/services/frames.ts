@@ -1,6 +1,6 @@
+import { initJourneyWithFrames } from "./frames/initScript";
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { ethers } from "ethers";
-import { initJourneyWithFrames } from "./frames/initScript";
 import { APP_URL } from "~~/constants";
 import { Frame, Journey } from "~~/types/commontypes";
 
