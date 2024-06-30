@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import { createImageFromHtml } from "~~/services/frames";
+import { getShopifyProducts } from "~~/services/shopify/fetchProducts";
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,15 +18,15 @@ const ShopifyModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   };
 
   const onAddButton = async () => {
-    const svg = await createImageFromHtml("<div>hello</div>");
-    console.log(svg);
+    const products = await getShopifyProducts(storeName, apiKey);
+    console.log(products);
   };
   return (
     <Dialog open={isOpen} onClose={handleClose} className="fixed z-50 overflow-y-auto w-[100%]">
       <DialogTitle className="text-center">Shopify Connect</DialogTitle>
       <DialogContent className="flex flex-col gap-4 w-[600px]">
         <TextField
-          label="Store Name"
+          label="Store URL"
           value={storeName}
           onChange={e => setStoreName(e.target.value)}
           variant="outlined"

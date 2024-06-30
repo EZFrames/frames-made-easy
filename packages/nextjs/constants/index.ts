@@ -7,27 +7,31 @@ export const txFrame = {
     {
       action: "tx",
       label: "purchase",
-      postUrl: `${APP_URL}/frame/tx`,
+      postUrl: `${APP_URL}/api/orchestrator/1`,
       target: "",
     },
   ],
   image: {
-    src: `https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png`,
+    src: `https://amber-causal-cougar-937.mypinata.cloud/ipfs/QmafH4oZDZWFynGyK9gHVvPRFTTFFrbwYwGQNps4FDLky2`,
+  },
+  input: {
+    text: "Enter No of items",
   },
 } as FrameMetadataType;
+
 export const emailFrame = {
   buttons: [
     {
       action: "post",
-      label: "Dog pictures",
+      label: "Generate Receipt",
       target: ``,
     },
   ],
   image: {
-    src: `https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png`,
+    src: `https://amber-causal-cougar-937.mypinata.cloud/ipfs/QmcGop9sCSmcNktWcRXsokE9wjjcWqLhhMhWL3CywkqGXZ`,
   },
   input: {
-    text: "Type here",
+    text: "Enter your email",
   },
 } as FrameMetadataType;
 
