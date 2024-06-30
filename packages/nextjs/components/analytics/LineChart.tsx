@@ -2,7 +2,6 @@ import React from "react";
 import Chart from "react-apexcharts";
 
 const LineChart = ({ data }: { data: any }) => {
-  // Prepare data for ApexCharts
   const series = [
     {
       name: "Total Interactions",

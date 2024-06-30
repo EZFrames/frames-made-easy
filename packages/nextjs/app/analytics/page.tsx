@@ -47,7 +47,7 @@ const AnalyticsPage = () => {
   useEffect(() => {
     const getDateRange = () => {
       const today = new Date();
-      const actualToday = new Date(today.getDate() + 1);
+      const actualToday = new Date(today.getDate() + 2);
       const yesterday = new Date(today);
       yesterday.setDate(today.getDate() - 1);
       const lastWeek = new Date(today);
@@ -67,8 +67,11 @@ const AnalyticsPage = () => {
     };
     const { start, end } = getDateRange();
     getTotalInteractions(start, end, journeyId).then(data => setTotalInteractions(data));
-    getUniqueUsers(start, end, journeyId).then(data => setUniqueInteractions(data));
-    getTotalInteractionsGraph(start, end, journeyId).then(data => {
+    getUniqueUsers(start, end, journeyId).then(data => {
+      setUniqueInteractions(data);
+    });
+    getTotalInteractionsGraph(start, journeyId).then(data => {
+      console.log(data);
       setTotalInteractionsGraph(data);
     });
   }, [dateRange, journeyId]);
@@ -148,6 +151,11 @@ const AnalyticsPage = () => {
                 <TableRow>
                   <TableCell>
                     <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      Journey ID
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
                       Journey Name
                     </Typography>
                   </TableCell>
@@ -161,6 +169,7 @@ const AnalyticsPage = () => {
               <TableBody>
                 {top5Journeys.map((frame, index) => (
                   <TableRow key={index}>
+                    <TableCell>{frame._id}</TableCell>
                     <TableCell>{frame.journeyName}</TableCell>
                     <TableCell>{frame.count}</TableCell>
                   </TableRow>

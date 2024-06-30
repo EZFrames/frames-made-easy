@@ -11,18 +11,15 @@ export async function GET(request: NextRequest) {
   await connectDB();
   const { searchParams } = new URL(request.url);
   const startDate = searchParams.get("startDate");
-  const endDate = searchParams.get("endDate");
   const frameId = searchParams.get("frameId");
   const journeyId = searchParams.get("journeyId");
   const dateFilter: DateFilter = {};
+  console.log(startDate, frameId, journeyId);
   if (startDate) {
     dateFilter.$gte = new Date(startDate);
   }
-  if (endDate) {
-    dateFilter.$lte = new Date(endDate);
-  }
   const query: any = {};
-  if (startDate || endDate) {
+  if (startDate) {
     query.createdAt = dateFilter;
   }
   if (frameId) {
@@ -58,6 +55,7 @@ export async function GET(request: NextRequest) {
     },
   ];
   const results = await Analytics.aggregate(aggregationPipeline).exec();
+  console.log(results);
   // write a loop iterating from startDate to endDate and filling in the missing dates with 0
   return new NextResponse(JSON.stringify(results), {
     headers: {

@@ -11,18 +11,14 @@ export async function GET(request: NextRequest) {
   await connectDB();
   const { searchParams } = new URL(request.url);
   const startDate = searchParams.get("startDate");
-  const endDate = searchParams.get("endDate");
   const frameId = searchParams.get("frameId");
   const journeyId = searchParams.get("journeyId");
   const dateFilter: DateFilter = {};
   if (startDate) {
     dateFilter.$gte = new Date(startDate);
   }
-  if (endDate) {
-    dateFilter.$lte = new Date(endDate);
-  }
   const query: any = {};
-  if (startDate || endDate) {
+  if (startDate) {
     query.createdAt = dateFilter;
   }
   if (frameId) {
