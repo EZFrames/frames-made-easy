@@ -4,6 +4,35 @@ import { useProductJourney } from "~~/providers/ProductProvider";
 import { getFrameById } from "~~/services/frames";
 import { Frame } from "~~/types/commontypes";
 
+const thumbnailImageStyle = {
+  marginTop: "-7px",
+  marginLeft: "7px",
+  maxWidth: "90%",
+  height: "auto",
+  borderRadius: "5px",
+};
+const sidebarStyle = {
+  height: "605px",
+  padding: "10px",
+  overflow: "auto",
+};
+
+const thumbnailStyle = {
+  padding: "10px",
+  height: "175px",
+  marginBottom: "10px",
+  boxShadow: "2px 2px 2px grey",
+  cursor: "pointer",
+  borderWidth: "2px",
+  borderStyle: "solid",
+  borderColor: "black",
+  borderRadius: "15px",
+  transition: "background-color 0.3s",
+};
+const thumbnailActiveStyle = {
+  ...thumbnailStyle,
+  backgroundColor: "#c0c0c0",
+};
 function FrameSidebar() {
   const { frames: dbFrames, frame, setFrame, setCurrentFrame, createFrame } = useProductJourney();
   const [frames, setFrames] = useState<Frame[] | undefined>(undefined);
@@ -27,22 +56,22 @@ function FrameSidebar() {
   if (!frames) return null;
   return (
     <div className="bg-white flex flex-col gap-2 p-4 h-full">
-      <div className="flex flex-wrap gap-2 h-[600px] overflow-y-scroll">
-        {frames.map((frame, index) => (
+      <div style={sidebarStyle}>
+        {frames.map(slide => (
           <div
-            key={index}
-            className={`border-2 p-2 w-full h-40 flex flex-col items-center justify-center ${
-              currentFrameId === frame._id ? "border-blue-500" : "border-black"
-            }`}
+            key={slide._id}
+            style={slide._id === currentFrameId ? thumbnailActiveStyle : thumbnailStyle}
             onClick={() => {
-              setCurrentFrameId(frame._id as string);
-              setFrame(frame);
-              setCurrentFrame(frame.frameJson);
+              setCurrentFrameId(slide._id as string);
+              setFrame(slide);
+              setCurrentFrame(slide.frameJson);
             }}
           >
-            <h3 className="text-center text-sm">{frame.name}</h3>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={frame.frameJson.image?.src} alt={frame.name} className="w-32 h-auto" />
+            {/*@ts-ignore*/}
+            <img src={slide?.frameJson?.image.src} alt={slide?.name} style={thumbnailImageStyle} />
+            <div style={{ alignItems: "center", justifyContent: "center", display: "flex", marginTop: "-0px" }}>
+              {slide.name}
+            </div>
           </div>
         ))}
       </div>
