@@ -1,75 +1,89 @@
-import FrameRender from "./FrameRenderer";
-import { FrameMetadataType } from "@coinbase/onchainkit";
-import { useState } from "react";
-type FrameRenderProps = {
-  frames: FrameMetadataType[];
+import { useEffect, useState } from "react";
+import { DEFAULT_FRAME } from "~~/constants";
+import { useProductJourney } from "~~/providers/ProductProvider";
+import { getFrameById } from "~~/services/frames";
+import { Frame } from "~~/types/commontypes";
+
+const thumbnailImageStyle = {
+  marginTop: "-7px",
+  marginLeft: "7px",
+  maxWidth: "90%",
+  height: "auto",
+  maxHeight: "90%",
+  borderRadius: "5px",
+};
+const sidebarStyle = {
+  height: "605px",
+  padding: "10px",
+  overflow: "auto",
 };
 
+const thumbnailStyle = {
+  padding: "10px",
+  height: "175px",
+  marginBottom: "10px",
+  boxShadow: "2px 2px 2px grey",
+  cursor: "pointer",
+  borderWidth: "2px",
+  borderStyle: "solid",
+  borderColor: "black",
+  borderRadius: "15px",
+  transition: "background-color 0.3s",
+};
+const thumbnailActiveStyle = {
+  ...thumbnailStyle,
+  backgroundColor: "#c0c0c0",
+};
+function FrameSidebar() {
+  const { productQuery, frame, setFrame, setCurrentFrame, createFrame } = useProductJourney();
+  const [frames, setFrames] = useState<Frame[] | undefined>(undefined);
+  const [currentFrameId, setCurrentFrameId] = useState<string>(frame?._id as string);
+  useEffect(() => {
+    if (productQuery.data) {
+      Promise.all(productQuery.data.frames.map(frame => getFrameById(frame)))
+        .then(data => setFrames(data))
+        .catch(error => console.error("Error fetching frames:", error));
+    }
+  }, [productQuery.data]);
 
+  useEffect(() => {
+    setCurrentFrameId(frame?._id as string);
+  }, [frame]);
 
-
-
-
-function FrameSidebar({ frames }: FrameRenderProps) {
-     const [currentSlide, setCurrentSlide] = useState(0);
-
-const slides = [
-  { id: 1, title: 'Frame 1', content: 'This is the first slide', img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs' },
-  { id: 2, title: 'Frame 2', content: 'This is the second slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
-  { id: 3, title: 'Frame 3', content: 'This is the third slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
-  { id: 3, title: 'Frame 3', content: 'This is the third slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
-  { id: 3, title: 'Frame 3', content: 'This is the third slide' ,img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs' },
-        { id: 3, title: 'Frame 3', content: 'This  is the third slide',img:'https://ipfs.io/ipfs/QmVc3Cb4onDDjGRoELc2HUhiCdDGz5nWkwCUXXMPre27bs'  },
- 
-];
-  const thumbnailImageStyle = {
-    marginTop: '-7px',
-    marginLeft:'7px',
-    maxWidth: '90%',
-    height: 'auto',
-    borderRadius: '5px',
+  const onCreate = async () => {
+    await createFrame.mutateAsync({
+      name: "Frame",
+      frameJson: DEFAULT_FRAME,
+    });
   };
-  const sidebarStyle = {
-    width: '250px',
-    height : '645px',
-    marginLeft: "10px",
- marginRight:"20px",
-    padding: '10px',
-    boxShadow: '2px 0 5px rgba(0, 0, 0, 0.1)',
-    overflow: 'auto'
-  };
-
-  const thumbnailStyle = {
-    padding: '10px',
-    height:'200px',
-    marginBottom: '10px',
-    boxShadow: '2px 2px 2px grey',
-    cursor: 'pointer',
- borderWidth: '2px',
-    borderStyle: 'solid',
-    borderColor: 'black',
-    borderRadius: '15px',
-    transition: 'background-color 0.3s',
-
-  };
-      const thumbnailActiveStyle = {
-    ...thumbnailStyle,
-    backgroundColor: '#c0c0c0',
-  };
+  if (!frames) return null;
   return (
-    <div style={sidebarStyle}>
-        {slides.map((slide, index) => (
+    <div className="bg-white flex flex-col gap-2 p-4 h-full">
+      <div style={sidebarStyle}>
+        {frames.map(slide => (
           <div
-            key={slide.id}
-            style={index === currentSlide ? thumbnailActiveStyle : thumbnailStyle}
-            onClick={() => setCurrentSlide(index)}
+            key={slide._id}
+            style={slide._id === currentFrameId ? thumbnailActiveStyle : thumbnailStyle}
+            onClick={() => {
+              setCurrentFrameId(slide._id as string);
+              setFrame(slide);
+              setCurrentFrame(slide.frameJson);
+            }}
           >
-     <img src={slide.img} alt={slide.title} style={thumbnailImageStyle} />
-  <div style={{alignItems:"center", justifyContent:"center", display:"flex", marginTop:"-0px"}}>{slide.title}</div>
+            {/*@ts-ignore*/}
+            <img src={slide?.frameJson?.image.src} alt={slide?.name} style={thumbnailImageStyle} />
+            <div style={{ alignItems: "center", justifyContent: "center", display: "flex", marginTop: "-0px" }}>
+              {slide.name}
+            </div>
           </div>
         ))}
-      
       </div>
+      <div className="mt-auto flex justify-center w-full">
+        <button onClick={onCreate} className="btn btn-primary w-full">
+          Create
+        </button>
+      </div>
+    </div>
   );
 }
 
