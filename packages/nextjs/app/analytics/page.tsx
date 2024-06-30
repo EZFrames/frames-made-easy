@@ -93,7 +93,7 @@ const AnalyticsPage = () => {
           <Grid item xs={12} md={6}>
             <Box sx={{ p: 2, border: "1px solid #ccc", borderRadius: "4px", textAlign: "center" }}>
               <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                Unique Interactions
+                Unique User Interactions
               </Typography>
               <Typography variant="h4">{uniqueInteractions}</Typography>
             </Box>
