@@ -4,7 +4,6 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 //https://sepolia.basescan.org/address/0x059ee9bde2aff94d0e6ad396ec0ec7d27bff6dc8 
-0x059ee9BDE2aFf94d0E6AD396ec0ec7d27bff6dc8
 contract MyToken is ERC20, Ownable, ERC20Permit {
     constructor(address initialOwner)
         ERC20("USDC", "USDC")

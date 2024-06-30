@@ -490,6 +490,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ethereum-attestation-service/eas-contracts@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ethereum-attestation-service/eas-contracts@npm:1.4.1"
+  dependencies:
+    hardhat: 2.22.1
+  checksum: 9b78873bbb9efd8540fd332bedd660750c7bba0202ee894a1eaec5f13fc6f691332bf8cdedefe49b043e5be748c2ed7889b5e53f617a8585c5ae1d2e4351a350
+  languageName: node
+  linkType: hard
+
+"@ethereum-attestation-service/eas-sdk@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "@ethereum-attestation-service/eas-sdk@npm:2.3.0"
+  dependencies:
+    "@ethereum-attestation-service/eas-contracts": 1.4.1
+    "@openzeppelin/merkle-tree": ^1.0.6
+    ethers: ^6.11.1
+    js-base64: ^3.7.7
+    lodash: ^4.17.21
+    multiformats: 9.9.0
+    pako: ^2.1.0
+    semver: ^7.6.0
+  checksum: b78dc1495e2f6aa39d0caf3a5008915e7e6b1c01857395ce359fa343725408b6af082e762febb5327d0e460d549ff703e99806432f56c12bbcafb5749a6e8867
+  languageName: node
+  linkType: hard
+
 "@ethereumjs/common@npm:^3.2.0":
   version: 3.2.0
   resolution: "@ethereumjs/common@npm:3.2.0"
@@ -941,22 +966,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/core@npm:^1.6.0":
-  version: 1.6.4
-  resolution: "@floating-ui/core@npm:1.6.4"
+"@floating-ui/core@npm:^1.0.0":
+  version: 1.6.3
+  resolution: "@floating-ui/core@npm:1.6.3"
   dependencies:
-    "@floating-ui/utils": ^0.2.4
-  checksum: 6855472c00ceaa14e0f1cb4bd5de0de01d05cd46bdf12cb19bd6a89fa70bdfba0460a776dc50d28ab40e3bddc291e2211958497528fdd98653ea7260d61e0442
+    "@floating-ui/utils": ^0.2.3
+  checksum: ef2f6d8d0afeca3c7c908ff4122965099efb162e2b00a3c7b245f7357ffdcfa850341eacd4d8a0169d965f91ed33953206543cf7d713bd975d0e28b5e3d3a919
   languageName: node
   linkType: hard
 
 "@floating-ui/dom@npm:^1.0.0":
-  version: 1.6.7
-  resolution: "@floating-ui/dom@npm:1.6.7"
+  version: 1.6.6
+  resolution: "@floating-ui/dom@npm:1.6.6"
   dependencies:
-    "@floating-ui/core": ^1.6.0
-    "@floating-ui/utils": ^0.2.4
-  checksum: 66605a2948bfe7532408197b4c522fecf04cf11e7839623d0dca0d22362b42d64a5db2f3be865053e9b0d44c89faf1befa9a4ce1b7fa595d1b3dc82f635d079c
+    "@floating-ui/core": ^1.0.0
+    "@floating-ui/utils": ^0.2.3
+  checksum: edc7538805aee8d11385bc53e086395abd26371277baeb3e6a209ec72ea714f5d93a4fc6fe8b26b2de4d83ae0c3adb47540a01ffee6148be43c85da87b1dd76c
   languageName: node
   linkType: hard
 
@@ -972,10 +997,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/utils@npm:^0.2.4":
-  version: 0.2.4
-  resolution: "@floating-ui/utils@npm:0.2.4"
-  checksum: af44cdb3f394fbee6abc933fc3c25bf22f3f0bac58150eee8cc1dcc7e9be56a19b13e438820160614a90712e5a43f84b091afa6689318a10504042930ae9cf44
+"@floating-ui/utils@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@floating-ui/utils@npm:0.2.3"
+  checksum: 25c61c6391c2b6d46305c377b5fb6929c953d5ee8e79785cdb63137f7e7a557555cc2d97331d5fd6d848f69760095e645631c0a915766cd7343b555e4c9ecf66
   languageName: node
   linkType: hard
 
@@ -1751,10 +1776,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nomicfoundation/edr-darwin-arm64@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr-darwin-arm64@npm:0.3.8"
+  checksum: 20166c1cd0413fb3078c8240ad3604fb6ff6076b8142dfff14e51715ed313c73ec90486fe0a3b5a48ca3031e98e92339cd2bf825f6f199bfdf9b41bec906ebb8
+  languageName: node
+  linkType: hard
+
 "@nomicfoundation/edr-darwin-arm64@npm:0.4.0":
   version: 0.4.0
   resolution: "@nomicfoundation/edr-darwin-arm64@npm:0.4.0"
   checksum: 61458dc5c9a6429c8225c3a5cffa6e634df86ae7d0a4e27392e99c5ddd0d9bc355de07ba74f9527b3d40a0d819a04485ade107c8ecc3ec86381411ef86b430ce
+  languageName: node
+  linkType: hard
+
+"@nomicfoundation/edr-darwin-x64@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr-darwin-x64@npm:0.3.8"
+  checksum: c9ba1c9eeda71876f6c69550b20f7b0d865f6249cb88c0a3dc853d7ca32061d9a71f40f14cc628fa7f286786fc2cd48c5a2a9527a6d0f55939f2a9565809b561
   languageName: node
   linkType: hard
 
@@ -1765,10 +1804,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nomicfoundation/edr-linux-arm64-gnu@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr-linux-arm64-gnu@npm:0.3.8"
+  checksum: bebb780f8c22ca13af9b336873a6d00091139f88669ba4c569d03efd7a6671f10b4c6afd7ee9444d9b18364d05eedf46f4dd82d1e7329de32267175127a6989b
+  languageName: node
+  linkType: hard
+
 "@nomicfoundation/edr-linux-arm64-gnu@npm:0.4.0":
   version: 0.4.0
   resolution: "@nomicfoundation/edr-linux-arm64-gnu@npm:0.4.0"
   checksum: 7a0d39bc6402d0694e550d21a78bc49ab5b8a45a4853d619f4e42022bc1d4c06d380e31dfcade43f732dd3f799a725e7d2efdb942f34ca64e34c58cb92dc9afd
+  languageName: node
+  linkType: hard
+
+"@nomicfoundation/edr-linux-arm64-musl@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr-linux-arm64-musl@npm:0.3.8"
+  checksum: 6cf009e4686780c41c6af271e67d1414b5e5096e5422f64980b8c3a4ddd6273b3289a5d228d976b217d6c1d8da52af912f599d923a098225b9dd906f03b889c8
   languageName: node
   linkType: hard
 
@@ -1779,10 +1832,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nomicfoundation/edr-linux-x64-gnu@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr-linux-x64-gnu@npm:0.3.8"
+  checksum: 6afb66601880bee40a254272ecb88d3c00b1acd97bde503127b2d900d15aa2707926b56e652abdfb0c0e75dde53e201aaef40ae0fd3bd7c6e48163eaa6ed3a17
+  languageName: node
+  linkType: hard
+
 "@nomicfoundation/edr-linux-x64-gnu@npm:0.4.0":
   version: 0.4.0
   resolution: "@nomicfoundation/edr-linux-x64-gnu@npm:0.4.0"
   checksum: 6164a41c9310e755168b78ae7654d5cad1b6b2c3586d694d0e7e70fc3a9eb12312b5e2e5be893abe4cec2b402553cb32428c0553d31d655643bc2db200fbf040
+  languageName: node
+  linkType: hard
+
+"@nomicfoundation/edr-linux-x64-musl@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr-linux-x64-musl@npm:0.3.8"
+  checksum: 72cd4be88ea30fd47fa1f984f446d80bf6d33e928e35df02ae4b842701b459dd92d7ba4071e388c95739a9688d6247100cb7155f3e67a5e624f54b2b42098dfd
   languageName: node
   linkType: hard
 
@@ -1793,10 +1860,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nomicfoundation/edr-win32-x64-msvc@npm:0.3.8":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr-win32-x64-msvc@npm:0.3.8"
+  checksum: d7b5bbe71f2347075a9e4d88d22609ec9b8058734ee048ff94300fecb51afad96d0d596686ad9cf6cf8ee74d1c117bf53ce5d77bf077cb472977d4a9bd88eb43
+  languageName: node
+  linkType: hard
+
 "@nomicfoundation/edr-win32-x64-msvc@npm:0.4.0":
   version: 0.4.0
   resolution: "@nomicfoundation/edr-win32-x64-msvc@npm:0.4.0"
   checksum: 3f36760dbb80b0d0dde6685d4eddadc2aa8e4cc002bae291c89378a90402b95815066b50b4226e691f3fceea732f535dbeedc4c51525bd8f5d9f574de846d369
+  languageName: node
+  linkType: hard
+
+"@nomicfoundation/edr@npm:^0.3.1":
+  version: 0.3.8
+  resolution: "@nomicfoundation/edr@npm:0.3.8"
+  dependencies:
+    "@nomicfoundation/edr-darwin-arm64": 0.3.8
+    "@nomicfoundation/edr-darwin-x64": 0.3.8
+    "@nomicfoundation/edr-linux-arm64-gnu": 0.3.8
+    "@nomicfoundation/edr-linux-arm64-musl": 0.3.8
+    "@nomicfoundation/edr-linux-x64-gnu": 0.3.8
+    "@nomicfoundation/edr-linux-x64-musl": 0.3.8
+    "@nomicfoundation/edr-win32-x64-msvc": 0.3.8
+  checksum: 31047fdde18034e2c6bd65dfbe3192c149b2af7f06a108e8c7b829c45bc5071c9d536c68d2d3b988bc67c7f7d331f0a88eee49ce3c882b3bcd5e20bc301d32a8
   languageName: node
   linkType: hard
 
@@ -2030,6 +2119,16 @@ __metadata:
   version: 5.0.2
   resolution: "@openzeppelin/contracts@npm:5.0.2"
   checksum: 0cce6fc284bd1d89e2a447027832a62f1356b44ee31088899453e10349a63a62df2f07da63d76e4c41aad9c86b96b650b2b6fc85439ef276850dda1170a047fd
+  languageName: node
+  linkType: hard
+
+"@openzeppelin/merkle-tree@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@openzeppelin/merkle-tree@npm:1.0.6"
+  dependencies:
+    "@ethersproject/abi": ^5.7.0
+    ethereum-cryptography: ^1.1.2
+  checksum: 1f6bfd986e10fa9b699de878ae606c5bffbf21b47b10c52ca9efb5de8d42fc2df0221c05ddbb6a7a617e4c2f758b151b8624806f4184a3084d66de418c9d9c28
   languageName: node
   linkType: hard
 
@@ -2743,21 +2842,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.49.1":
-  version: 5.49.1
-  resolution: "@tanstack/query-core@npm:5.49.1"
-  checksum: 244ce65d0e47388073adaebac72feba6032b51458f35469941bddfe5cc5eb9d354a89c43e1e37c655d16c869effbd5edf05952810b64e39deede18560d4bac55
+"@tanstack/query-core@npm:5.49.0":
+  version: 5.49.0
+  resolution: "@tanstack/query-core@npm:5.49.0"
+  checksum: d95f4b822e4a7f85ee3f5a57b7f709a4319f0a6a00f1e0dc5fa2122e8e64ca1f74ee2377dd5673feeb10ad233e432324e8f395763b072c3e4af0728c3cda093e
   languageName: node
   linkType: hard
 
 "@tanstack/react-query@npm:^5.28.6":
-  version: 5.49.2
-  resolution: "@tanstack/react-query@npm:5.49.2"
+  version: 5.49.0
+  resolution: "@tanstack/react-query@npm:5.49.0"
   dependencies:
-    "@tanstack/query-core": 5.49.1
+    "@tanstack/query-core": 5.49.0
   peerDependencies:
     react: ^18.0.0
-  checksum: 8f96a1292a3ec1fb249a2606acb0a7dbbeb6c4f4c9f424b69997df8b7bcf506b62ce1b93bc57ca9154534f98e538166cc8822e3eaaccac4bb2393c9f17839fdd
+  checksum: 31bfe3318dd0699868e896ec598ed8e60cdaa6e035ff1515afaeb85c484f91b16cad8a4de153d383622e5d2e990f02226926a5bd6632788b6ceb415a23e6687a
   languageName: node
   linkType: hard
 
@@ -4133,6 +4232,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yr/monotone-cubic-spline@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@yr/monotone-cubic-spline@npm:1.0.3"
+  checksum: ebc75e4d84d5b97d1d715452088ffe3cf6b3d71943433118116a2e90f17aed654b6f726868e913a49aef28645bb8afcc28580349de1ac77ad0c7dab3d991843e
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:1":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
@@ -4437,6 +4543,21 @@ __metadata:
     normalize-path: ^3.0.0
     picomatch: ^2.0.4
   checksum: 3e044fd6d1d26545f235a9fe4d7a534e2029d8e59fa7fd9f2a6eb21230f6b5380ea1eaf55136e60cbf8e613544b3b766e7a6fa2102e2a3a117505466e3025dc2
+  languageName: node
+  linkType: hard
+
+"apexcharts@npm:^3.49.2":
+  version: 3.49.2
+  resolution: "apexcharts@npm:3.49.2"
+  dependencies:
+    "@yr/monotone-cubic-spline": ^1.0.3
+    svg.draggable.js: ^2.2.2
+    svg.easing.js: ^2.0.0
+    svg.filter.js: ^2.0.2
+    svg.pathmorphing.js: ^0.1.3
+    svg.resize.js: ^1.4.3
+    svg.select.js: ^3.0.1
+  checksum: 8c2a429800ace53f653720c713f1e6c2f125f22d1b8c9e6d0cecf8d0936b4dc9aa912daf798944c6aa594fc6c058705d5791eceff801e75298d547a710531edf
   languageName: node
   linkType: hard
 
@@ -7336,7 +7457,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethereum-cryptography@npm:^1.0.3":
+"ethereum-cryptography@npm:^1.0.3, ethereum-cryptography@npm:^1.1.2":
   version: 1.2.0
   resolution: "ethereum-cryptography@npm:1.2.0"
   dependencies:
@@ -7436,7 +7557,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^6.10.0":
+"ethers@npm:^6.10.0, ethers@npm:^6.11.1":
   version: 6.13.1
   resolution: "ethers@npm:6.13.1"
   dependencies:
@@ -8490,6 +8611,67 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hardhat@npm:2.22.1":
+  version: 2.22.1
+  resolution: "hardhat@npm:2.22.1"
+  dependencies:
+    "@ethersproject/abi": ^5.1.2
+    "@metamask/eth-sig-util": ^4.0.0
+    "@nomicfoundation/edr": ^0.3.1
+    "@nomicfoundation/ethereumjs-common": 4.0.4
+    "@nomicfoundation/ethereumjs-tx": 5.0.4
+    "@nomicfoundation/ethereumjs-util": 9.0.4
+    "@nomicfoundation/solidity-analyzer": ^0.1.0
+    "@sentry/node": ^5.18.1
+    "@types/bn.js": ^5.1.0
+    "@types/lru-cache": ^5.1.0
+    adm-zip: ^0.4.16
+    aggregate-error: ^3.0.0
+    ansi-escapes: ^4.3.0
+    boxen: ^5.1.2
+    chalk: ^2.4.2
+    chokidar: ^3.4.0
+    ci-info: ^2.0.0
+    debug: ^4.1.1
+    enquirer: ^2.3.0
+    env-paths: ^2.2.0
+    ethereum-cryptography: ^1.0.3
+    ethereumjs-abi: ^0.6.8
+    find-up: ^2.1.0
+    fp-ts: 1.19.3
+    fs-extra: ^7.0.1
+    glob: 7.2.0
+    immutable: ^4.0.0-rc.12
+    io-ts: 1.10.4
+    keccak: ^3.0.2
+    lodash: ^4.17.11
+    mnemonist: ^0.38.0
+    mocha: ^10.0.0
+    p-map: ^4.0.0
+    raw-body: ^2.4.1
+    resolve: 1.17.0
+    semver: ^6.3.0
+    solc: 0.7.3
+    source-map-support: ^0.5.13
+    stacktrace-parser: ^0.1.10
+    tsort: 0.0.1
+    undici: ^5.14.0
+    uuid: ^8.3.2
+    ws: ^7.4.6
+  peerDependencies:
+    ts-node: "*"
+    typescript: "*"
+  peerDependenciesMeta:
+    ts-node:
+      optional: true
+    typescript:
+      optional: true
+  bin:
+    hardhat: internal/cli/bootstrap.js
+  checksum: 6494697d37198d32b9151e8303b8e771f1d10f50ddd5488c619a8b6d36c6ee391a274ce75f7ac17b574fec84e6e1dc11f63487d308013873183cd2af58865200
+  languageName: node
+  linkType: hard
+
 "hardhat@npm:^2.19.4":
   version: 2.22.5
   resolution: "hardhat@npm:2.22.5"
@@ -9490,6 +9672,13 @@ __metadata:
   bin:
     jiti: bin/jiti.js
   checksum: 9ea4a70a7bb950794824683ed1c632e2ede26949fbd348e2ba5ec8dc5efa54dc42022d85ae229cadaa60d4b95012e80ea07d625797199b688cc22ab0e8891d32
+  languageName: node
+  linkType: hard
+
+"js-base64@npm:^3.7.7":
+  version: 3.7.7
+  resolution: "js-base64@npm:3.7.7"
+  checksum: d1b02971db9dc0fd35baecfaf6ba499731fb44fe3373e7e1d6681fbd3ba665f29e8d9d17910254ef8104e2cb8b44117fe4202d3dc54c7cafe9ba300fe5433358
   languageName: node
   linkType: hard
 
@@ -10601,7 +10790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"multiformats@npm:^9.4.2":
+"multiformats@npm:9.9.0, multiformats@npm:^9.4.2":
   version: 9.9.0
   resolution: "multiformats@npm:9.9.0"
   checksum: d3e8c1be400c09a014f557ea02251a2710dbc9fca5aa32cc702ff29f636c5471e17979f30bdcb0a9cbb556f162a8591dc2e1219c24fc21394a56115b820bb84e
@@ -11324,6 +11513,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pako@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "pako@npm:2.1.0"
+  checksum: 71666548644c9a4d056bcaba849ca6fd7242c6cf1af0646d3346f3079a1c7f4a66ffec6f7369ee0dc88f61926c10d6ab05da3e1fca44b83551839e89edd75a3e
+  languageName: node
+  linkType: hard
+
 "parent-module@npm:^1.0.0":
   version: 1.0.1
   resolution: "parent-module@npm:1.0.1"
@@ -12012,6 +12208,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-apexcharts@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "react-apexcharts@npm:1.4.1"
+  dependencies:
+    prop-types: ^15.8.1
+  peerDependencies:
+    apexcharts: ^3.41.0
+    react: ">=0.13"
+  checksum: 32d1a946ad40493ecd82f7ba68c8657424a8cf0d08e0cd813752211175d6b23dd3ae9f0f7edbac9dd2bbc050a7f3531ca6e5d7ea0158f1c276c49c4f397f347f
+  languageName: node
+  linkType: hard
+
 "react-copy-to-clipboard@npm:^5.1.0":
   version: 5.1.0
   resolution: "react-copy-to-clipboard@npm:5.1.0"
@@ -12658,9 +12866,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "se-2@workspace:."
   dependencies:
+    "@emotion/react": ^11.11.4
+    "@emotion/styled": ^11.11.5
+    "@ethereum-attestation-service/eas-sdk": ^2.3.0
+    apexcharts: ^3.49.2
     axios: ^1.7.2
     husky: ^8.0.1
     lint-staged: ^13.0.3
+    react-apexcharts: ^1.4.1
   languageName: unknown
   linkType: soft
 
@@ -13484,6 +13697,77 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
+  languageName: node
+  linkType: hard
+
+"svg.draggable.js@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "svg.draggable.js@npm:2.2.2"
+  dependencies:
+    svg.js: ^2.0.1
+  checksum: b9068975d743be664695e7d4323624bba8ff2795b855a46a2f15c842827022684501d63239c99723238d39c9f991940dc04639b8f43ac124fd9ca44a34e6aab2
+  languageName: node
+  linkType: hard
+
+"svg.easing.js@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "svg.easing.js@npm:2.0.0"
+  dependencies:
+    svg.js: ">=2.3.x"
+  checksum: 0f7df78333d879dc00200ddbb4e9d7d745307c002b5dd242ddaf276e8d907067ab75383869ef1940975be1765d595d379ced491ff4bdf78d867bff8225544e92
+  languageName: node
+  linkType: hard
+
+"svg.filter.js@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "svg.filter.js@npm:2.0.2"
+  dependencies:
+    svg.js: ^2.2.5
+  checksum: f0e780bfe385336a7c9d1d8a3ebba1ca9712f6bf0917769fd30c9fd4e3559186ec18d4d6520d9841a9cceba2ac8ff1eacc76b98f7e8b15d5f4a58975a8ecdc64
+  languageName: node
+  linkType: hard
+
+"svg.js@npm:>=2.3.x, svg.js@npm:^2.0.1, svg.js@npm:^2.2.5, svg.js@npm:^2.4.0, svg.js@npm:^2.6.5":
+  version: 2.7.1
+  resolution: "svg.js@npm:2.7.1"
+  checksum: 945bfc9623985fefb4c7275a1b98b5168e5857291f46cbd299bd2e14ce7f4428fea6569c7446d37b75694c43dea01a5f179fbce4f770e7dcd136117bb8f1a3f3
+  languageName: node
+  linkType: hard
+
+"svg.pathmorphing.js@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "svg.pathmorphing.js@npm:0.1.3"
+  dependencies:
+    svg.js: ^2.4.0
+  checksum: bcbe1ccea95c980fa127cb6ad955f1970d763143ab11576cca2fd8d13616deedf933bc17a6310754cd0cb404ac501d627afb5805c578878e4c8f24e1818a7de6
+  languageName: node
+  linkType: hard
+
+"svg.resize.js@npm:^1.4.3":
+  version: 1.4.3
+  resolution: "svg.resize.js@npm:1.4.3"
+  dependencies:
+    svg.js: ^2.6.5
+    svg.select.js: ^2.1.2
+  checksum: 8f4116f4422b72c66bb1110dca2d77ab2cc0665db1e0cd1c0020e06fe9684f53d9bc7aca3b90ce82ce35103ff8ea83a93df1db5d88c889e511d7622c9b000884
+  languageName: node
+  linkType: hard
+
+"svg.select.js@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "svg.select.js@npm:2.1.2"
+  dependencies:
+    svg.js: ^2.2.5
+  checksum: 1dbbb44d16170aad1372e0f8f0d109a21e4216e1e4e28a566738c6cb6b4519b37e44cd1f7de06f3c8eec5e588845d8cbb0e37efc89b8d27401e4c6a0a13564a4
+  languageName: node
+  linkType: hard
+
+"svg.select.js@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "svg.select.js@npm:3.0.1"
+  dependencies:
+    svg.js: ^2.6.5
+  checksum: 0ce3bda86f4b527ce1add02d0ac61ac26678db24c0e4126c584b752e65a1c3458bbe958e29eb4604b3157ef1fdace37b727eccbc2ccdb4fce0015e0ad196fc1c
   languageName: node
   linkType: hard
 
