@@ -1,7 +1,7 @@
-import { coinbaseWallet } from 'wagmi/connectors';
 import { Chain, createClient, http } from "viem";
-import { hardhat, mainnet, baseSepolia } from "viem/chains";
+import { baseSepolia, hardhat, mainnet } from "viem/chains";
 import { createConfig } from "wagmi";
+import { coinbaseWallet } from "wagmi/connectors";
 import scaffoldConfig from "~~/scaffold.config";
 import { getAlchemyHttpUrl } from "~~/utils/scaffold-eth";
 
@@ -16,8 +16,8 @@ export const wagmiConfig = createConfig({
   chains: [baseSepolia],
   connectors: [
     coinbaseWallet({
-      appName: 'Frames Builder',
-      preference: 'smartWalletOnly',
+      appName: "Frames Builder",
+      preference: "smartWalletOnly",
     }),
   ],
   ssr: true,

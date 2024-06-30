@@ -58,7 +58,7 @@ const FrameEditor = () => {
   if (!currentFrame) return null;
   return (
     <div className="bg-white flex flex-col gap-4 p-4">
-            <TextField
+      <TextField
         id="outlined-basic"
         label="Frame Name"
         variant="outlined"

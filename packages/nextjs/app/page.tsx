@@ -25,7 +25,6 @@ export default Home;
 
 // const Home: NextPage =  () => {
 
-
 //   async function lfg() {
 
 //     const eas = new EAS("0x4200000000000000000000000000000000000021");
@@ -58,9 +57,6 @@ export default Home;
 //     // const offchain = await eas.getOffchain();
 //     //  console.log(offchain);
 
-
-
-
 // // const offchainAttestation = await offchain.signOffchainAttestation({
 // //   recipient: '0xFD50b031E778fAb33DfD2Fc3Ca66a1EeF0652165',
 // //   // Unix timestamp of when attestation expires. (0 for no expiration)
@@ -74,9 +70,6 @@ export default Home;
 // //   refUID: '0x0000000000000000000000000000000000000000000000000000000000000000',
 // //   data: encodedData,
 // // }, signer);
-
-
-
 
 // // console.log("New attestation UID:", offchainAttestation);
 
@@ -780,7 +773,7 @@ export default Home;
 //           </h1>
 //           <div className="flex justify-center items-center space-x-2">
 //             <p className="my-2 font-medium">Connected Address:</p>
-     
+
 //           </div>
 //           <p className="text-center text-lg">
 //             Get started by editing{" "}

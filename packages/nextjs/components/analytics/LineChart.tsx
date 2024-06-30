@@ -1,11 +1,13 @@
-import React from "react";
-import Chart from "react-apexcharts";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const LineChart = ({ data }: { data: any }) => {
   const series = [
     {
       name: "Total Interactions",
-      data: data.map(entry => entry.count),
+      data: data.map((entry: any) => entry.count),
     },
   ];
 
@@ -18,7 +20,7 @@ const LineChart = ({ data }: { data: any }) => {
       },
     },
     xaxis: {
-      categories: data.map(entry => entry.date),
+      categories: data.map((entry: any) => entry.date),
       title: {
         text: "Date",
       },
@@ -32,6 +34,7 @@ const LineChart = ({ data }: { data: any }) => {
 
   return (
     <div className="line-chart">
+      {/* @ts-ignore */}
       <Chart options={options} series={series} type="line" height={350} />
     </div>
   );

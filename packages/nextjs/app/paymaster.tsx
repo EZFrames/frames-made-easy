@@ -714,7 +714,7 @@
 //           </h1>
 //           <div className="flex justify-center items-center space-x-2">
 //             <p className="my-2 font-medium">Connected Address:</p>
-     
+
 //           </div>
 //           <p className="text-center text-lg">
 //             Get started by editing{" "}

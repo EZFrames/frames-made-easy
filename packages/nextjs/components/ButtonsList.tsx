@@ -10,7 +10,7 @@ import { notification } from "~~/utils/scaffold-eth";
 
 const ButtonList = () => {
   const router = useRouter();
-  const { currentFrame, setCurrentFrame, frame, saveFrame, deleteFrame,journey } = useProductJourney();
+  const { currentFrame, setCurrentFrame, frame, saveFrame, deleteFrame, journey } = useProductJourney();
   const [activeButtonIndex, setActiveButtonIndex] = useState<number>(0);
   const [open, setOpen] = useState(false);
   if (!currentFrame) return null;

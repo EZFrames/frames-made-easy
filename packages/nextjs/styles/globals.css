@@ -52,13 +52,13 @@ p {
 }
 @keyframes wave {
   from {
-      transform: translateX(-50%) skew(0, -10deg);
+    transform: translateX(-50%) skew(0, -10deg);
   }
   to {
-      transform: translateX(-30%) skew(10deg, 0);
-      -webkit-transform: translateX(-30%) skew(10deg, 0);
-      -moz-transform: translateX(-30%) skew(10deg, 0);
-      -ms-transform: translateX(-30%) skew(10deg, 0);
-      -o-transform: translateX(-30%) skew(10deg, 0);
-}
+    transform: translateX(-30%) skew(10deg, 0);
+    -webkit-transform: translateX(-30%) skew(10deg, 0);
+    -moz-transform: translateX(-30%) skew(10deg, 0);
+    -ms-transform: translateX(-30%) skew(10deg, 0);
+    -o-transform: translateX(-30%) skew(10deg, 0);
+  }
 }

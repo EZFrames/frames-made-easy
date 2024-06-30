@@ -111,9 +111,8 @@ const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
             )}
           </Select>
         </>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
-import { APP_URL, DEFAULT_FRAME } from "~~/constants";
+import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
+import { ethers } from "ethers";
+import { APP_URL } from "~~/constants";
 import { Frame, Journey } from "~~/types/commontypes";
-import { GetDefaultFrame } from "./frames/frameGetters";
 
 export const getFrameById = async (id: string) => {
   try {
@@ -63,7 +64,7 @@ export const createJourney = async (journey: Partial<Journey>) => {
     });
     if (!response.ok) {
       throw new Error("Network response was not ok");
-    };
+    }
     return response.json();
   } catch (error: any) {
     console.error(error);
@@ -89,3 +90,35 @@ export const saveFrame = async (frame: Frame) => {
     throw new Error(error.message);
   }
 };
+
+export async function createAttestation(txnId: string) {
+  const eas = new EAS("0x4200000000000000000000000000000000000021");
+  const provider = new ethers.JsonRpcProvider("https://base-sepolia.infura.io/v3/847856edbfc14f50a4782dce0fa77ce5");
+  const signer = new ethers.Wallet("c04f2876f3691d44fdba3592bf800c05516d419f10ac269a7a565c21dfda57fa", provider);
+  eas.connect(signer);
+  const schemaUID = "0x6cf920b46db9fc89b78efe8c06f77f1d169ab43faec920161e4c3247daff3717";
+  const schemaEncoder = new SchemaEncoder(
+    "string seller,string buyer,string amount,string quantity,string txHash,string productId",
+  );
+  const encodedData = schemaEncoder.encodeData([
+    { name: "seller", value: "", type: "string" },
+    { name: "buyer", value: "", type: "string" },
+    { name: "amount", value: "", type: "string" },
+    { name: "quantity", value: "", type: "string" },
+    { name: "txHash", value: txnId, type: "string" },
+    { name: "productId", value: "", type: "string" },
+  ]);
+
+  const tx = await eas.attest({
+    schema: schemaUID,
+    data: {
+      recipient: "0x0000000000000000000000000000000000000000",
+      expirationTime: BigInt(0),
+      revocable: true, // Be aware that if your schema is not revocable, this MUST be false
+      data: encodedData,
+    },
+  });
+  const attestation = await tx.wait();
+  console.log("attestation", attestation);
+  return attestation;
+}

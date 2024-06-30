@@ -37,6 +37,7 @@ const ProductModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       quantity,
       price,
     });
+
     console.log(newProduct);
     notification.success("Frame Story created successfully");
     router.push(`/dashboard/${newProduct._id}`);
