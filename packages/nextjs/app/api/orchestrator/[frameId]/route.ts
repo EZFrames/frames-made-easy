@@ -22,24 +22,26 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const url = req.nextUrl.pathname;
   const frameId = url.replace(`/api/orchestrator`, "");
   const body = await req.json();
-  const state = JSON.parse(decodeURIComponent(body.untrustedData.state as string));
+  console.log("body", body);
+  // const state = JSON.parse(decodeURIComponent(body.untrustedData.state as string));
 
   // Creating Analytics for the frame asynchronously
-  storeAnalytics(body, state).catch(err => console.error("Error Saving Analytics", err));
+  // storeAnalytics(body, state).catch(err => console.error("Error Saving Analytics", err));
   // Adding State for Button Press and Inputted Text on last frame
-  const stateUpdate = {
-    ...state,
-    [`${frameId}ButtonPressed`]: body.untrustedData.buttonIndex,
-    [`${frameId}InputtedText`]: body.untrustedData.inputText,
-  };
+  // const stateUpdate = {
+  //   ...state,
+  //   [`${frameId}ButtonPressed`]: body.untrustedData.buttonIndex,
+  //   [`${frameId}InputtedText`]: body.untrustedData.inputText,
+  // };
   const dbFrame = await getFrameAtServer(frameId);
+  console.log("dbFrame", dbFrame);
   if (!dbFrame) {
     return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
   }
   const nextFrame = dbFrame.frameJson;
-  nextFrame.state = {
-    ...stateUpdate,
-  };
+  // nextFrame.state = {
+  //   ...stateUpdate,
+  // };
   return new NextResponse(getFrameHtmlResponse(nextFrame));
 }
 
