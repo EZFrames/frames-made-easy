@@ -2,18 +2,17 @@ import { FrameMetadataType } from "@coinbase/onchainkit";
 import { Abi } from "viem";
 
 export const APP_URL = "http://localhost:3000";
-
 export const txFrame = {
   buttons: [
     {
       action: "tx",
       label: "purchase",
-      postUrl: `${APP_URL}/api/orchestrator/tx`,
-      target: `${APP_URL}/api/orchestrator/tx`,
+      postUrl: `${APP_URL}/api/orchestrator/1`,
+      target: "",
     },
   ],
   image: {
-    src: `https://amber-causal-cougar-937.mypinata.cloud/ipfs/QmcGop9sCSmcNktWcRXsokE9wjjcWqLhhMhWL3CywkqGXZ`,
+    src: `https://amber-causal-cougar-937.mypinata.cloud/ipfs/QmafH4oZDZWFynGyK9gHVvPRFTTFFrbwYwGQNps4FDLky2`,
   },
   input: {
     text: "Enter No of items",
@@ -25,7 +24,7 @@ export const emailFrame = {
     {
       action: "post",
       label: "Generate Receipt",
-      target: "",
+      target: ``,
     },
   ],
   image: {
@@ -37,33 +36,33 @@ export const emailFrame = {
 } as FrameMetadataType;
 
 export const DEFAULT_FRAME: FrameMetadataType = {
-  ttons: [
-    
-    action: "post",
-    target: "http://localhost:3000/api/orchestrator/1",
-    label: "Home 1",
-  },
-    
-    action: "link",
-    label: "OnchainKit",
-    target: "https://onchainkit.xyz",
-  },
-    
-    action: "post_redirect",
-label: "Dog pictures",
-},
-    ],
-      age: {
-      src: "https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png",
+  buttons: [
+    {
+      action: "post",
+      target: "http://localhost:3000/api/orchestrator/1",
+      label: "Home 1",
     },
-      ate: {
-      time: "2024-06-28T16:14:14.986Z",
-      journey_id: "1",
-      frame_id: "2",
+    {
+      action: "link",
+      label: "OnchainKit",
+      target: "https://onchainkit.xyz",
     },
-      put: {
-      text: "Type here",
-      },
+    {
+      action: "post_redirect",
+      label: "Dog pictures",
+    },
+  ],
+  image: {
+    src: "https://w7.pngwing.com/pngs/666/150/png-transparent-messi-world-cup-2023-thumbnail.png",
+  },
+  state: {
+    time: "2024-06-28T16:14:14.986Z",
+    journey_id: "1",
+    frame_id: "2",
+  },
+  input: {
+    text: "Type here",
+  },
 };
 
 export const ABI: Abi = [
