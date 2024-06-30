@@ -124,7 +124,7 @@ export const AddressInfoDropdown = ({
               <button
                 className="btn-sm !rounded-xl flex gap-3 py-3"
                 type="button"
-                onClick={() => {yarn 
+                onClick={() => { 
                   setSelectingNetwork(true);
                 }}
               >
