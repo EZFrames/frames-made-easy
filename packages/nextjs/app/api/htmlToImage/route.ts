@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
-import { NextApiRequest } from "next";
 import path from "path";
 import { html } from "satori-html";
 import satori from "satori/wasm";
@@ -25,8 +24,11 @@ const createImageFromHtml = async (HTML: string) => {
   return svg;
 };
 
-export default async function POST(req: NextApiRequest) {
-  const { HTML } = req.body;
-  const svg = await createImageFromHtml(HTML);
+export async function POST(req: NextRequest) {
+  const payload = await req.json();
+  const { html } = payload;
+  console.log(html);
+  const svg = await createImageFromHtml(html);
+  console.log(svg);
   return new NextResponse(svg, { headers: { "Content-Type": "image/svg+xml" } });
 }

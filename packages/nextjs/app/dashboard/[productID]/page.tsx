@@ -13,7 +13,7 @@ const Product: NextPage = () => {
         <div className="col-span-1">
           <FrameSidebar />
         </div>
-        <div className="col-span-3 mt-24">
+        <div className="col-span-3 mt-4">
           <FrameRender />
         </div>
         <div className="col-span-2 ">

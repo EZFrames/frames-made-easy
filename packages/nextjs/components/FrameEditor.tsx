@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonList from "./ButtonsList";
 import InputField from "./InputField";
 import { MenuItem, Select } from "@mui/material";
@@ -7,6 +7,53 @@ import { useProductJourney } from "~~/providers/ProductProvider";
 const FrameEditor = () => {
   const { currentFrame, setCurrentFrame } = useProductJourney();
   const [imageUrlOption, setImageUrlOption] = useState("url");
+  const [htmlInput, setHtmlInput] = useState("");
+  const [imageUrl, setImageUrl] = useState(currentFrame?.image?.src || "");
+
+  const getImageResponse = async (html: string) => {
+    const response = await fetch(`/api/imageGeneration`, {
+      body: JSON.stringify({ html }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+    const data = await response.json();
+    return data;
+  };
+
+  const handleImageUrlChange = (value: string) => {
+    setImageUrl(value);
+    if (!currentFrame) return;
+    setCurrentFrame({
+      ...currentFrame,
+      image: {
+        // @ts-ignore
+        ...currentFrame?.image,
+        src: value,
+        aspectRatio: "1:1",
+      },
+    });
+  };
+
+  const handleHtmlToImage = async () => {
+    const result = await getImageResponse(htmlInput);
+    setImageUrl(result);
+    if (!currentFrame) return;
+    setCurrentFrame({
+      ...currentFrame,
+      image: {
+        // @ts-ignore
+        ...currentFrame.image,
+        src: result,
+        aspectRatio: "1:1",
+      },
+    });
+  };
+  useEffect(() => {
+    // @ts-ignore
+    setImageUrl(currentFrame?.image?.src || "");
+  }, [currentFrame]);
   if (!currentFrame) return null;
   return (
     <div className="bg-white flex flex-col gap-4 p-4">
@@ -24,23 +71,28 @@ const FrameEditor = () => {
         <MenuItem value="url">URL</MenuItem>
         <MenuItem value="html">HTML</MenuItem>
       </Select>{" "}
-      <InputField
-        id="imageUrl"
-        label={imageUrlOption === "url" ? "Enter Image URL" : "Enter HTML Code"}
-        // @ts-ignore
-        value={currentFrame?.image?.src || ""}
-        onChange={value => {
-          setCurrentFrame({
-            ...currentFrame,
-            image: {
-              // @ts-ignore
-              ...currentFrame?.image,
-              src: value,
-            },
-          });
-        }}
-        placeholder={imageUrlOption === "url" ? "Image URL" : "HTML Code"}
-      />
+      {imageUrlOption === "url" ? (
+        <InputField
+          id="imageUrl"
+          label="Enter Image URL"
+          value={imageUrl}
+          onChange={value => handleImageUrlChange(value)}
+          placeholder="Image URL"
+        />
+      ) : (
+        <div className="flex flex-col gap-2">
+          <InputField
+            id="htmlInput"
+            label="Enter HTML Code"
+            value={htmlInput}
+            onChange={value => setHtmlInput(value)}
+            placeholder="HTML Code"
+          />
+          <button onClick={handleHtmlToImage} className="btn btn-primary">
+            Convert HTML to Image
+          </button>
+        </div>
+      )}
       <InputField
         id="additionalInput"
         label="Enter Additional Input"

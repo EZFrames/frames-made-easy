@@ -9,6 +9,7 @@ const thumbnailImageStyle = {
   marginLeft: "7px",
   maxWidth: "90%",
   height: "auto",
+  maxHeight: "90%",
   borderRadius: "5px",
 };
 const sidebarStyle = {
@@ -34,19 +35,21 @@ const thumbnailActiveStyle = {
   backgroundColor: "#c0c0c0",
 };
 function FrameSidebar() {
-  const { frames: dbFrames, frame, setFrame, setCurrentFrame, createFrame } = useProductJourney();
+  const { productQuery, frame, setFrame, setCurrentFrame, createFrame } = useProductJourney();
   const [frames, setFrames] = useState<Frame[] | undefined>(undefined);
   const [currentFrameId, setCurrentFrameId] = useState<string>(frame?._id as string);
   useEffect(() => {
-    if (dbFrames) {
-      Promise.all(dbFrames.map(frame => getFrameById(frame)))
+    if (productQuery.data) {
+      Promise.all(productQuery.data.frames.map(frame => getFrameById(frame)))
         .then(data => setFrames(data))
         .catch(error => console.error("Error fetching frames:", error));
     }
-  }, [dbFrames]);
+  }, [productQuery.data]);
+
   useEffect(() => {
     setCurrentFrameId(frame?._id as string);
   }, [frame]);
+
   const onCreate = async () => {
     await createFrame.mutateAsync({
       name: "Frame",

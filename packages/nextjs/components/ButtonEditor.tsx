@@ -1,7 +1,12 @@
+import { useEffect, useState } from "react";
 import InputField from "./InputField";
 import { FrameButtonMetadata } from "@coinbase/onchainkit";
 import { IconButton, MenuItem, Select } from "@mui/material";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { useProductJourney } from "~~/providers/ProductProvider";
+import { getFrameById } from "~~/services/frames";
+import { Frame } from "~~/types/commontypes";
+import { APP_URL } from "~~/constants";
 
 interface ButtonEditorProps {
   button: FrameButtonMetadata;
@@ -10,6 +15,17 @@ interface ButtonEditorProps {
 }
 
 const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
+  const { frames: dbFrames } = useProductJourney();
+  const [frames, setFrames] = useState<Frame[] | undefined>();
+
+  useEffect(() => {
+    if (dbFrames) {
+      Promise.all(dbFrames.map(frame => getFrameById(frame)))
+        .then(data => setFrames(data))
+        .catch(error => console.error("Error fetching frames:", error));
+    }
+  }, [dbFrames]);
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2 mt-4">
@@ -30,7 +46,7 @@ const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
       <Select
         id="buttonAction"
         value={button.action}
-        onChange={e => onSave({ ...button, action: e.target.value as string })}
+        onChange={e => onSave({ ...button, action: e.target.value as FrameButtonMetadata["action"] })}
         variant="outlined"
       >
         <MenuItem value="tx">Transaction</MenuItem>
@@ -38,21 +54,19 @@ const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
         <MenuItem value="link">Link</MenuItem>
         <MenuItem value="post_redirect">Post Redirect</MenuItem>
       </Select>
-      <InputField
-        id="buttonTarget"
-        label="Edit Button Target"
-        value={button.target || ""}
-        onChange={target => onSave({ ...button, target })}
-        placeholder="Button Target"
-      />
-      {button.action === "tx" && (
-        <InputField
-          id="buttonPostUrl"
-          label="Edit Button Post URL"
-          value={button.postUrl || ""}
-          onChange={postUrl => onSave({ ...button, postUrl })}
-          placeholder="Button Post URL"
-        />
+      {button.action === "post" && (
+        <Select
+          id="post"
+          value={button.target}
+          onChange={e => onSave({ ...button, target: `${APP_URL}`+e.target.value as FrameButtonMetadata["target"] })}
+          variant="outlined"
+        >
+          {frames?.map((frame, index) => (
+            <MenuItem key={index} value={frame._id}>
+              {frame.name}
+            </MenuItem>
+          ))}
+        </Select>
       )}
     </div>
   );

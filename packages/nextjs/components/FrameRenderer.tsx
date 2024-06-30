@@ -13,8 +13,9 @@ function FrameRender() {
         style={{
           borderRadius: "4px",
           border: "1px solid #ccc",
-          width: "100%", // Set the width to 100%
-          height: "40vh", // Maintain aspect ratio
+          aspectRatio: "1:1",
+          maxHeight: "500px",
+          width: "100%",
         }}
       />
       {currentFrame.input?.text && (

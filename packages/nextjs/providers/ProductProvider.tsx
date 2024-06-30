@@ -12,12 +12,13 @@ interface IProductJourney {
   frame: Frame | null;
   setFrame: (frame: Frame) => void;
   journey: Journey | null;
-  frames: string[] | undefined;
   setCurrentFrame: (frame: FrameMetadataType) => void;
   currentFrame: FrameMetadataType | null;
   createFrame: UseMutationResult<Frame, Error, Omit<Frame, "_id">>;
   saveFrame: UseMutationResult<Frame, Error, Frame>;
   deleteFrame: UseMutationResult<Frame, Error, string>;
+  htmlToImage: UseMutationResult<{ image: string }, Error, { html: string }>;
+  frames: string[] | undefined;
 }
 
 const ProductJourney = createContext<IProductJourney | null>(null);
@@ -92,7 +93,6 @@ const useProduct = () => {
       return data;
     },
     onSettled: data => {
-      console.log(data);
       journey?.frames.push(data._id);
       updateProduct.mutateAsync(journey as Journey);
       setFrame(data);
@@ -145,11 +145,26 @@ const useProduct = () => {
       setCurrentFrame(null);
     },
   });
+
+  const htmlToImage = useMutation({
+    mutationFn: async (html: string) => {
+      const response = await fetch(`/api/htmlToImage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ html }),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      return data;
+    },
+  });
   const frames = useMemo(() => {
-    if (!journey) return;
     return journey?.frames;
   }, [journey]);
-
   return {
     productID,
     productQuery,
@@ -159,10 +174,11 @@ const useProduct = () => {
     currentFrame,
     setCurrentFrame,
     journey,
-    frames,
     createFrame,
     saveFrame,
     deleteFrame,
+    htmlToImage,
+    frames,
   };
 };
 
