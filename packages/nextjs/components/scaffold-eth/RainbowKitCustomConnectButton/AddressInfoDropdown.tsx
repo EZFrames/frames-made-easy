@@ -5,6 +5,7 @@ import { getAddress } from "viem";
 import { Address } from "viem";
 import { useDisconnect } from "wagmi";
 import {
+  LinkIcon,
   ArrowLeftOnRectangleIcon,
   ArrowTopRightOnSquareIcon,
   ArrowsRightLeftIcon,
@@ -16,6 +17,7 @@ import {
 import { BlockieAvatar, isENS } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 import { getTargetNetworks } from "~~/utils/scaffold-eth";
+import Link from 'next/link'; 
 
 const allowedNetworks = getTargetNetworks();
 
@@ -88,6 +90,14 @@ export const AddressInfoDropdown = ({
                 </div>
               </CopyToClipboard>
             )}
+          </li>
+          <li className={selectingNetwork ? "hidden" : ""}>
+            <label htmlFor="qrcode-modal" className="btn-sm !rounded-xl flex gap-3 py-3">
+            <LinkIcon className="h-6 w-4 ml-2 sm:ml-0" />
+              <a href="https://wallet.coinbase.com/">
+              <span className="whitespace-nowrap">View Smart Wallet</span>
+              </a>
+            </label>
           </li>
           <li className={selectingNetwork ? "hidden" : ""}>
             <label htmlFor="qrcode-modal" className="btn-sm !rounded-xl flex gap-3 py-3">
