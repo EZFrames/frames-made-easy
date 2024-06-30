@@ -60,7 +60,10 @@ const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
           id="post"
           value={removeUrl(button.target as string)}
           onChange={e =>
-            onSave({ ...button, target: (`${APP_URL}/api/orchestrator/` + e.target.value) as FrameButtonMetadata["target"] })
+            onSave({
+              ...button,
+              target: (`${APP_URL}/api/orchestrator/` + e.target.value) as FrameButtonMetadata["target"],
+            })
           }
           variant="outlined"
         >
@@ -88,25 +91,29 @@ const ButtonEditor = ({ button, onSave, onDelete }: ButtonEditorProps) => {
         <>
           <Select
             id="post"
-            value={button.target}
+            value={removeUrl(button.postUrl as string)}
             onChange={e =>
-              onSave({ ...button, postUrl: `${APP_URL}/api/orchestrator/` + e.target.value, target: `${APP_URL}/api/tx` })
+              onSave({
+                ...button,
+                postUrl: `${APP_URL}/api/orchestrator/` + e.target.value,
+                target: `${APP_URL}/api/orchestrator/tx`,
+              })
             }
             variant="outlined"
           >
-            {frames?.map((f, index) => (
-              <>
-                {f._id !== frame?._id && (
+            {frames?.map(
+              (f, index) =>
+                f._id !== frame?._id && (
                   <MenuItem key={index} value={f._id}>
                     {f.name}
                   </MenuItem>
-                )}
-              </>
-            ))}
+                ),
+            )}
           </Select>
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 

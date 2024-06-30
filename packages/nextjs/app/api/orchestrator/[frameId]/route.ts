@@ -22,7 +22,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const url = req.nextUrl.pathname;
   const frameId = url.replace(`/api/orchestrator`, "");
   const body = await req.json();
-  console.log("body", body);
+  console.log("GETTTTTING HIT")
   // const state = JSON.parse(decodeURIComponent(body.untrustedData.state as string));
 
   // Creating Analytics for the frame asynchronously
@@ -34,7 +34,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   //   [`${frameId}InputtedText`]: body.untrustedData.inputText,
   // };
   const dbFrame = await getFrameAtServer(frameId);
-  console.log("dbFrame", dbFrame);
   if (!dbFrame) {
     return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
   }
