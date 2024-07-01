@@ -28,8 +28,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const frameId = url.replace(`/api/orchestrator`, "");
   const body = await req.json();
   console.log("body", body);
-  if (body.untrustedData?.buttonIndex != "") {
-    const txnId = body.untrustedData?.transactionId;
+  if (typeof body.untrustedData?.transactionId === "string" && body.untrustedData.transactionId.trim() !== "") {
+    console.log("Creating Attestation");
+    const txnId = body.untrustedData.transactionId;
     const attestation = await createAttestation(txnId);
     console.log("attestation", attestation);
   }

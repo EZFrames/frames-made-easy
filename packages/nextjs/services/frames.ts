@@ -101,6 +101,9 @@ export const saveFrame = async (frame: Frame) => {
 };
 
 export async function createAttestation(txnId: string) {
+  if (!txnId || txnId === "") {
+    return;
+  }
   const eas = new EAS("0x4200000000000000000000000000000000000021");
   const provider = new ethers.JsonRpcProvider("https://base-sepolia.infura.io/v3/847856edbfc14f50a4782dce0fa77ce5");
   const signer = new ethers.Wallet("c04f2876f3691d44fdba3592bf800c05516d419f10ac269a7a565c21dfda57fa", provider);

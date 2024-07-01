@@ -99,8 +99,8 @@ export const GetBuyFrame = async (journey_id: string, frame_id: string, next_fra
       {
         action: "tx",
         label: "Buy",
-        postUrl: `${APP_URL}/api/orchestrator/` + next_frame_id,
         target: `${APP_URL}/api/orchestrator/tx`,
+        postUrl: `${APP_URL}/api/orchestrator/` + next_frame_id,
       },
     ],
     image: {

@@ -20,7 +20,7 @@ const FrameEditor = () => {
       method: "POST",
     });
     const data = await response.json();
-    return data;
+    return data.url;
   };
 
   const handleImageUrlChange = (value: string) => {
@@ -73,7 +73,7 @@ const FrameEditor = () => {
         }}
       />
       <label htmlFor="imageInput" className="block text-sm font-medium text-gray-700">
-        Image/HTML{" "}
+        Image/Text{" "}
       </label>
       <Select
         id="imageInput"
@@ -84,7 +84,7 @@ const FrameEditor = () => {
         variant="outlined"
       >
         <MenuItem value="url">URL</MenuItem>
-        <MenuItem value="html">HTML</MenuItem>
+        <MenuItem value="html">TEXT</MenuItem>
       </Select>{" "}
       {imageUrlOption === "url" ? (
         <InputField
@@ -98,13 +98,13 @@ const FrameEditor = () => {
         <div className="flex flex-col gap-2">
           <InputField
             id="htmlInput"
-            label="Enter HTML Code"
+            label="Enter Text"
             value={htmlInput}
             onChange={value => setHtmlInput(value)}
             placeholder="HTML Code"
           />
           <button onClick={handleHtmlToImage} className="btn btn-primary">
-            Convert HTML to Image
+            Convert Text to Image
           </button>
         </div>
       )}

@@ -1,13 +1,32 @@
-import { ImageResponse } from "next/og";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { ImageResponse } from "@vercel/og";
 import parse from "html-react-parser";
 
-// export const runtime = 'edge';
+export const JWT = process.env.NEXT_PUBLIC_PINATA_JWT;
+export const GATEWAY_URL = process.env.NEXT_PUBLIC_GATEWAY_URL;
+
+const uploadToIPFS = async (file, name) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("pinataMetadata", JSON.stringify({ name }));
+  formData.append("pinataOptions", JSON.stringify({ cidVersion: 1 }));
+
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${JWT}`,
+    },
+    body: formData,
+  };
+  const response = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", options);
+  const data = await response.json();
+  return data.IpfsHash;
+};
 
 export async function POST(req: NextRequest) {
   const payload = await req.json();
   const { html } = payload;
-  return new ImageResponse(
+  const imageResponse = new ImageResponse(
     (
       <div
         style={{
@@ -30,4 +49,19 @@ export async function POST(req: NextRequest) {
       height: 630,
     },
   );
+  const imageBuffer = await imageResponse
+    .blob()
+    .then(blob => blob.arrayBuffer())
+    .then(buffer => Buffer.from(buffer));
+
+
+  try {
+    const ipfsHash = await uploadToIPFS(new Blob([imageBuffer], { type: "image/png" }), "image");
+    const imageUrl = `${GATEWAY_URL}/${ipfsHash}`;
+
+    return NextResponse.json({ url: imageUrl });
+  } catch (error) {
+    console.error("Error uploading image to Pinata", error);
+    return NextResponse.json({ error: "Failed to upload image" }, { status: 500 });
+  }
 }
