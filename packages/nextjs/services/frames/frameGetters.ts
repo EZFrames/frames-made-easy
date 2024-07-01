@@ -46,6 +46,15 @@ export const GetDescriptionFrame = async (
   next_frame_id: string,
   productDesc: string,
 ) => {
+  const response = await fetch(`/api/imageGeneration`, {
+    body: JSON.stringify({ productDesc }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  });
+  const data = await response.json();
+
   const DESCRIPTION_FRAME: FrameMetadataType = {
     buttons: [
       {
@@ -55,7 +64,7 @@ export const GetDescriptionFrame = async (
       },
     ],
     image: {
-      src: "https://via.placeholder.com/150",
+      src: data.url,
     },
     state: {
       journey_id: journey_id,

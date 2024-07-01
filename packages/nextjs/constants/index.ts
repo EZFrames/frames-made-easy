@@ -1,7 +1,7 @@
 import { FrameMetadataType } from "@coinbase/onchainkit";
 import { Abi } from "viem";
 
-export const APP_URL = "https://fr3vl2gs-3000.inc1.devtunnels.ms";
+export const APP_URL = "https://950a-103-216-213-71.ngrok-free.app";
 export const txFrame = {
   buttons: [
     {

@@ -108,6 +108,11 @@ const AnalyticsPage = () => {
     getTop5Journeys(start, end).then((data: any[]) => settop5Journeys(data));
   }, [dateRange]);
 
+
+  useEffect(() => {
+    setSelectedChart("users");
+  }, [])
+
   return (
     <Container>
       <Box sx={{ my: 4 }}>

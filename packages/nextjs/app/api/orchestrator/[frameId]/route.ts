@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { FrameRequest, getFrameHtmlResponse } from "@coinbase/onchainkit";
 import Analytics from "~~/model/analytics";
-import connectDB from "~~/services/connectDB";
-import { createAttestation, getFrameAtServer } from "~~/services/frames";
 import Order from "~~/model/order";
+import connectDB from "~~/services/connectDB";
+import { createAttestation, getFrameAtServer, getJourneyById } from "~~/services/frames";
+import { Journey } from "~~/types/commontypes";
+import { warn } from "console";
+import { myAddress } from "~~/constants";
 
 const storeAnalytics = async (body: FrameRequest, state: any) => {
   const analyticsEntry = new Analytics({
@@ -29,28 +32,33 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const frameId = url.replace(`/api/orchestrator`, "");
   const body = await req.json();
   console.log("body", body);
-  const state = JSON.parse(decodeURIComponent(body.untrustedData?.state as string));
+  let state;
+  if (body.untrustedData?.state && typeof body.untrustedData.state === "string") {
+    console.log("Parsing State");
+    state = JSON.parse(decodeURIComponent(body.untrustedData?.state as string));
+
+  }
+  const journeyId = state?.journey_id || "";
+  const journey: Journey = await getJourneyById(journeyId);
+
   if (typeof body.untrustedData?.transactionId === "string" && body.untrustedData.transactionId.trim() !== "") {
-    console.log("Creating Attestation");
     const txnId = body.untrustedData.transactionId;
-    const attestation = await createAttestation(txnId);
-    console.log("attestation", attestation);
-    const NewOrder = new Order({
-      fid: body.untrustedData.fid as string,
-      journeyId: body.untrustedData.journey_id as string,
-      walletAddress: body.untrustedData.walletAddress as string,
-      quantity: body.untrustedData.quantity || 0,
-      price: body.untrustedData.price || 0,
+    createAttestation({
       txnId: txnId,
-      attestation: attestation,
+      productId: state.journey_id as string,
+      seller: state.journey.walletAddress as string || myAddress,
+      quantity: String(state.journey.quantity) || "",
+      amount: String(state.journey.price) || "",
+      buyer: String(body.untrustedData.fid),
     });
-    await NewOrder.save();
-    console.log("state", state);
   }
   let stateUpdate;
-  if (state) {
+  if (state && typeof state === "object") {
+    console.log("in HERE");
+
     // Creating Analytics for the frame asynchronously
     storeAnalytics(body, state).catch(err => console.error("Error Saving Analytics", err));
+
     // Adding State for Button Press and Inputted Text on last frame
     state.frame_id = frameId;
     stateUpdate = {
@@ -65,9 +73,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse(JSON.stringify({ message: "Frame not found" }), { status: 404 });
   }
   const nextFrame = dbFrame.frameJson;
-  if (state) {
+  if (state && typeof state === "object") {
     nextFrame.state = {
       ...stateUpdate,
+      journey,
     };
   }
 

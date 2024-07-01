@@ -1,7 +1,8 @@
 import { initJourneyWithFrames } from "./frames/initScript";
 import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { ethers } from "ethers";
-import { APP_URL } from "~~/constants";
+import { APP_URL, myAddress } from "~~/constants";
+import Order from "~~/model/order";
 import { Frame, Journey } from "~~/types/commontypes";
 
 export const getFrameById = async (id: string) => {
@@ -100,7 +101,15 @@ export const saveFrame = async (frame: Frame) => {
   }
 };
 
-export async function createAttestation(txnId: string) {
+export async function createAttestation({ txnId, seller, buyer, amount, quantity, productId }: {
+  txnId: string;
+  seller: string;
+  buyer: string;
+  amount: string;
+  quantity: string;
+  productId: string;
+}) {
+  console.log("createAttestation", txnId, seller, buyer, amount, quantity, productId);
   if (!txnId || txnId === "") {
     return;
   }
@@ -113,12 +122,12 @@ export async function createAttestation(txnId: string) {
     "string seller,string buyer,string amount,string quantity,string txHash,string productId",
   );
   const encodedData = schemaEncoder.encodeData([
-    { name: "seller", value: "", type: "string" },
-    { name: "buyer", value: "", type: "string" },
-    { name: "amount", value: "", type: "string" },
-    { name: "quantity", value: "", type: "string" },
+    { name: "seller", value: seller, type: "string" },
+    { name: "buyer", value: buyer, type: "string" },
+    { name: "amount", value: amount, type: "string" },
+    { name: "quantity", value: quantity, type: "string" },
     { name: "txHash", value: txnId, type: "string" },
-    { name: "productId", value: "", type: "string" },
+    { name: "productId", value: productId, type: "string" },
   ]);
 
   const tx = await eas.attest({
@@ -131,6 +140,16 @@ export async function createAttestation(txnId: string) {
     },
   });
   const attestation = await tx.wait();
+  const NewOrder = new Order({
+    fid: buyer as string,
+    journeyId: productId as string,
+    walletAddress: seller || myAddress,
+    quantity: quantity || 0,
+    price: amount || 0,
+    txnId: txnId,
+    attestation: attestation,
+  });
+  NewOrder.save();
   console.log("attestation", attestation);
   return attestation;
 }
@@ -152,3 +171,20 @@ export const saveJourney = async (journey: Partial<Journey>) => {
     throw new Error(error.message);
   }
 };
+
+
+export const getJourneyById = async (id: string) => {
+  if (id === "") return;
+  try {
+    const response = await fetch(`${APP_URL}/api/journey/${id}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  }
+  catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+}

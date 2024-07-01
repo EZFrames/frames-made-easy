@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { createJourney } from "~~/services/frames";
-import { getShopifyProducts } from "~~/services/shopify/fetchProducts";
+import { DEFAULT_SHOPIFY_URL, DEFAULT_SHOPIFY_ACCESS_TOKEN } from "~~/services/shopify/fetchProducts";
 import { notification } from "~~/utils/scaffold-eth";
 
 interface ModalProps {
@@ -18,6 +18,11 @@ const ShopifyModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     setApiKey("");
     onClose();
   };
+
+  React.useEffect(() => {
+    setStoreName(DEFAULT_SHOPIFY_URL);
+    setApiKey(DEFAULT_SHOPIFY_ACCESS_TOKEN);
+  }, []);
 
   const onAddButton = async () => {
     try {
@@ -63,6 +68,8 @@ const ShopifyModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       });
 
       await Promise.all(createJourneyPromises);
+      notification.success("Products added successfully");
+      handleClose();
       console.log("All createJourney calls completed");
     } catch (error) {
       console.error("Error in onAddButton:", error);
