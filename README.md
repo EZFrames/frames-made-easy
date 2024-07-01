@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>🏗 Frames Builder</h1>
+    <h1>🏗 Framify</h1>
 </div>
 <br>
 <div align="center">
@@ -45,6 +45,10 @@ The platform handles the generation of the necessary frame definitions and inter
 Tracking Analytics and Product Performance:
 Dashboard keeps a track of all the stories created by the user. 
 Emables us to leverage technologies like FARCASTER HUB to pull in data to showcase to the user on the fly for the particular story
+
+## How it works 
+- Firstly mint usdc token on base sepolia towards your address so that you can try out framify. You need to hit the mint function and you can only mint 100 usdc tokens everytime as of yet so just put your address and 100 in the amount field and you will get 100 usdc in your wallet 
+https://sepolia.basescan.org/address/0x151630785016e17378ca5ac7eF2b0936a3e5C64f#writeContract 
 
 
 ## Technologies Used
