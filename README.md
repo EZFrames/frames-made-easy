@@ -15,7 +15,8 @@
 </div>
 <br>
 
-![Frames Builder](/public/img/image.png)
+<div><a href=""><img src="assets/home.png" width="100%" /></a></div>
+
 
 ## Application Features
 
