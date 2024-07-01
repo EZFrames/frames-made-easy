@@ -7,7 +7,7 @@
 </div>
  <br>
 <div align="center">
-    Built for both <a href="https://onchain-summer.devfolio.co/">Onchain Buildathon</a> and <a href="https://eas-onchain-summer.devfolio.co/">Attestation Summer</a> 2024 for <a href="https://attest.org/">EAS</a> and <a href="https://www.base.org/">BASE</a> by a based team of <a href="https://buidlguidl.com/">BuidlGuidl</a> members
+    Built for <a href="https://onchain-summer.devfolio.co/">Onchain Buildathon</a> and <a href="https://eas-onchain-summer.devfolio.co/">Attestation Summer</a> 2024 for <a href="https://attest.org/">EAS</a> and <a href="https://www.base.org/">BASE</a> by a based team of <a href="https://buidlguidl.com/">BuidlGuidl</a> members
 </div>
 <br>
 <div align="center">
