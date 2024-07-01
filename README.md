@@ -66,6 +66,20 @@ Handles the payment for a product in the transaction frames
 
 Schema that we have for users to 'attest' to the order receipt details onchain to share with customer in warpcast DM later
 
+## Shopify Integration
+
+Example onchain smoothie shopify store: https://my-on-chain-store.myshopify.com/
+
+In order to use our shopify integration we require users to create a custom app with access to the ADMIN api and permissions enabled for the 'read_products' scope. See the images below.
+
+<div><a href=""><img src="assets/shopify1.png" width="100%" /></a></div>
+
+<div><a href=""><img src="assets/shopify2.png" width="100%" /></a></div>
+
+We require users input the shopify url + their API key to GET their product data and create product frames.
+
+<div><a href=""><img src="assets/shopify3.png" width="100%" /></a></div>
+
 ## Example Frames
 
 ## Similar Products
