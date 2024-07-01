@@ -24,8 +24,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { set } from "nprogress";
 import LineChart from "~~/components/analytics/LineChart";
 import {
+  GetOrders,
   getTop5Journeys,
   getTotalInteractions,
   getTotalInteractionsGraph,
@@ -41,6 +43,7 @@ const AnalyticsPage = () => {
   const [top5Journeys, settop5Journeys] = useState<any[]>([]);
   const [totalInteractionsGraph, setTotalInteractionsGraph] = useState<any[]>([]);
   const [uniqueUsersGraph, setUniqueUsersGraph] = useState<any[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
   const [selectedChart, setSelectedChart] = useState("users");
 
   const formatDate = (date: Date) => {
@@ -79,8 +82,10 @@ const AnalyticsPage = () => {
       setTotalInteractionsGraph(data);
     });
     getUniqueUsersGraph(start, journeyId).then(data => {
-      console.log(data);
       setUniqueUsersGraph(data);
+    });
+    GetOrders(journeyId, start).then(data => {
+      setOrders(data.orders);
     });
   }, [dateRange, journeyId]);
 
@@ -108,10 +113,9 @@ const AnalyticsPage = () => {
     getTop5Journeys(start, end).then((data: any[]) => settop5Journeys(data));
   }, [dateRange]);
 
-
   useEffect(() => {
     setSelectedChart("users");
-  }, [])
+  }, []);
 
   return (
     <Container>
@@ -201,6 +205,57 @@ const AnalyticsPage = () => {
                     <TableCell>{frame._id}</TableCell>
                     <TableCell>{frame.journeyName}</TableCell>
                     <TableCell>{frame.count}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+        <Box sx={{ my: 4 }}>
+          <Typography variant="h6" style={{ fontWeight: "bold" }}>
+            Order Table
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      Product ID
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      FID
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      Quantity
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      Wallet Address
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                      Attestation
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {orders?.map((order, index1) => (
+                  <TableRow key={index1}>
+                    <TableCell>{order?.journeyId}</TableCell>
+                    <TableCell>{order?.fid}</TableCell>
+                    <TableCell>{order?.quantity}</TableCell>
+                    <TableCell>{order?.walletAddress}</TableCell>
+                    <TableCell>
+                      https://easscan.org/attestation/view/0x11c7c8e4c9d46886d5f33183a353f2e113b9ef6774b770d49e5e22e4f8de41b3
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

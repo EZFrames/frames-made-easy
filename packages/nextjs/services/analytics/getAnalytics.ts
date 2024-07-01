@@ -77,4 +77,16 @@ export const getUniqueUsersGraph = async (startDate: string, journeyId = "") => 
     currentDate.setDate(currentDate.getDate() + 1);
   }
   return finalGraph;
-}
+};
+
+export const GetOrders = async (journeyId: string, startDate: string) => {
+  let queryparams = "?startDate=" + startDate;
+  if (journeyId !== "") {
+    queryparams += `&journeyId=${journeyId}`;
+  }
+  const res = await fetch(`/api/order` + queryparams, {
+    method: "GET",
+  });
+  const data = await res.json();
+  return data;
+};
