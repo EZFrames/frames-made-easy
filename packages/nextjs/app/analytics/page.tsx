@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import {
   Box,
+  Button,
+  ButtonGroup,
   Container,
   FormControl,
   Grid,
@@ -28,6 +30,7 @@ import {
   getTotalInteractions,
   getTotalInteractionsGraph,
   getUniqueUsers,
+  getUniqueUsersGraph,
 } from "~~/services/analytics/getAnalytics";
 
 const AnalyticsPage = () => {
@@ -37,6 +40,8 @@ const AnalyticsPage = () => {
   const [uniqueInteractions, setUniqueInteractions] = useState<number>();
   const [top5Journeys, settop5Journeys] = useState<any[]>([]);
   const [totalInteractionsGraph, setTotalInteractionsGraph] = useState<any[]>([]);
+  const [uniqueUsersGraph, setUniqueUsersGraph] = useState<any[]>([]);
+  const [selectedChart, setSelectedChart] = useState("users");
 
   const formatDate = (date: Date) => {
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -71,8 +76,11 @@ const AnalyticsPage = () => {
       setUniqueInteractions(data);
     });
     getTotalInteractionsGraph(start, journeyId).then(data => {
-      console.log(data);
       setTotalInteractionsGraph(data);
+    });
+    getUniqueUsersGraph(start, journeyId).then(data => {
+      console.log(data);
+      setUniqueUsersGraph(data);
     });
   }, [dateRange, journeyId]);
 
@@ -137,9 +145,25 @@ const AnalyticsPage = () => {
         </Grid>
         <Box sx={{ my: 4 }}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
-            Interactions Over Time
+            Chart Type
           </Typography>
-          <LineChart data={totalInteractionsGraph} />
+          <ButtonGroup variant="contained" sx={{ mb: 4 }}>
+            <Button onClick={() => setSelectedChart("interactions")} disabled={selectedChart === "interactions"}>
+              Total Interactions Over Time
+            </Button>
+            <Button onClick={() => setSelectedChart("users")} disabled={selectedChart === "users"}>
+              Unique Users Over Time
+            </Button>
+          </ButtonGroup>
+          {selectedChart === "users" ? (
+            <Box>
+              <LineChart data={totalInteractionsGraph} />
+            </Box>
+          ) : (
+            <Box>
+              <LineChart data={uniqueUsersGraph} />
+            </Box>
+          )}
         </Box>
         <Box sx={{ my: 4 }}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
