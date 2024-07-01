@@ -1,9 +1,9 @@
 <div align="center">
-    <h1>🏗 Framify</h1>
+    <h1>🏗 Frames Builder</h1>
 </div>
 <br>
 <div align="center">
-    <a href="https://framify-seven.vercel.app/">App Demo Link</a> | <a href="https://my-on-chain-store.myshopify.com/">Example Shopify Store</a>
+    <a href="https://framify-seven.vercel.app/">App Demo Link</a> | <a href="https://youtu.be/zwhtIDavVhc">Youtube Demo</a> | <a href="https://my-on-chain-store.myshopify.com/">Example Shopify Store</a>
 </div>
  <br>
 <div align="center">
@@ -66,10 +66,6 @@ Handles the payment for a product in the transaction frames
 
 Schema that we have for users to 'attest' to the order receipt details onchain to share with customer in warpcast DM later
 
-## How it works 
-- Firstly mint usdc token on base sepolia towards your address so that you can try out framify. You need to hit the mint function and you can only mint 100 usdc tokens everytime as of yet so just put your address and 100 in the amount field and you will get 100 usdc in your wallet 
-https://sepolia.basescan.org/address/0x151630785016e17378ca5ac7eF2b0936a3e5C64f#writeContract 
-
 
 
 ## Shopify Integration
@@ -87,6 +83,9 @@ We require users input the shopify url + their API key to GET their product data
 <div><a href=""><img src="assets/shopify3.png" width="100%" /></a></div>
 
 ## Example Frames
+
+https://warpcast.com/tantodefi/0xc9cbcdb1
+
 
 ## Similar Products
 
