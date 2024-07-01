@@ -47,6 +47,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "@openzeppelin/contracts": "^4.8.1",
     "@typechain/ethers-v6": "^0.5.1",
     "dotenv": "^16.0.3",
