@@ -84,6 +84,9 @@ We require users input the shopify url + their API key to GET their product data
 
 ## Example Frames
 
+https://warpcast.com/tantodefi/0xc9cbcdb1
+
+
 ## Similar Products
 
 - <b>Frames built by PERCS:</b> Create a Farcaster Frame with selected products from your store. Basic frame creation.
