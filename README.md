@@ -66,3 +66,7 @@ Handles the payment for a product in the transaction frames
 Schema that we have for users to 'attest' to the order receipt details onchain to share with customer in warpcast DM later
 
 ## Example Frames
+
+## Similar Products
+
+- <b>Frames built by PERCS:</b> Create a Farcaster Frame with selected products from your store. Basic frame creation.
