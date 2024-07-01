@@ -1,12 +1,5 @@
 import { createFrame, saveFrame, saveJourney } from "../frames";
-import {
-  GetBuyFrame,
-  GetDescriptionFrame,
-  GetEmailFrame,
-  GetProductFrame,
-  GetQuantityFrame,
-  GetSuccessFrame,
-} from "./frameGetters";
+import { GetBuyFrame, GetDescriptionFrame, GetEmailFrame, GetProductFrame, GetSuccessFrame } from "./frameGetters";
 import { FrameMetadataType } from "@coinbase/onchainkit";
 import { emailFrame } from "~~/constants";
 

@@ -3,6 +3,7 @@ import { FrameRequest, getFrameHtmlResponse } from "@coinbase/onchainkit";
 import Analytics from "~~/model/analytics";
 import connectDB from "~~/services/connectDB";
 import { createAttestation, getFrameAtServer } from "~~/services/frames";
+import Order from "~~/model/order";
 
 const storeAnalytics = async (body: FrameRequest, state: any) => {
   const analyticsEntry = new Analytics({
@@ -28,13 +29,24 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const frameId = url.replace(`/api/orchestrator`, "");
   const body = await req.json();
   console.log("body", body);
+  const state = JSON.parse(decodeURIComponent(body.untrustedData?.state as string));
   if (typeof body.untrustedData?.transactionId === "string" && body.untrustedData.transactionId.trim() !== "") {
     console.log("Creating Attestation");
     const txnId = body.untrustedData.transactionId;
     const attestation = await createAttestation(txnId);
     console.log("attestation", attestation);
+    const NewOrder = new Order({
+      fid: body.untrustedData.fid as string,
+      journeyId: body.untrustedData.journey_id as string,
+      walletAddress: body.untrustedData.walletAddress as string,
+      quantity: body.untrustedData.quantity || 0,
+      price: body.untrustedData.price || 0,
+      txnId: txnId,
+      attestation: attestation,
+    });
+    await NewOrder.save();
+    console.log("state", state);
   }
-  const state = JSON.parse(decodeURIComponent(body.untrustedData?.state as string));
   let stateUpdate;
   if (state) {
     // Creating Analytics for the frame asynchronously

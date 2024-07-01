@@ -36,20 +36,17 @@ export const getTotalInteractionsGraph = async (startDate: string, journeyId = "
   const currentDate = new Date(startDate);
   const endDateObj = new Date();
   const adjustedDateObj = new Date(endDateObj.getTime() + 1 * 24 * 60 * 60 * 1000);
-  console.log("data", data);
   while (currentDate <= adjustedDateObj) {
-    const entry = data.find((entry: any) => {
-      const entryDate = new Date(entry.date).toDateString();
-      const currentDateWithoutTime = currentDate.toDateString();
-      return entryDate === currentDateWithoutTime;
-    });
     const dateStr = currentDate.toISOString().split("T")[0];
+    const entry = data.find((entry: any) => {
+      const entryDateStr = new Date(entry.date).toISOString().split("T")[0];
+      return entryDateStr === dateStr;
+    });
     if (entry) {
       finalGraph.push(entry);
     } else {
       finalGraph.push({ date: dateStr, count: 0 });
     }
-    console.log("finalGraph", finalGraph);
     currentDate.setDate(currentDate.getDate() + 1);
   }
   return finalGraph;
