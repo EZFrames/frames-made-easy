@@ -7,7 +7,7 @@
 </div>
  <br>
 <div align="center">
-    Built for both Onchain and Attestation Summer by <a href="https://attest.org/">EAS</a> and <a href="https://www.base.org/">BASE</a> by an awesome team of <a href="">BuidlGuidl</a> members
+    Built for both Onchain and Attestation Summer by <a href="https://attest.org/">EAS</a> and <a href="https://www.base.org/">BASE</a> by an awesome team of <a href="https://buidlguidl.com/">BuidlGuidl</a> members
 </div>
 <br>
 <div align="center">
