@@ -7,7 +7,7 @@
 </div>
  <br>
 <div align="center">
-    Built for both <a href="https://onchain-summer.devfolio.co/">Onchain Buildathon</a> and <a href="https://eas-onchain-summer.devfolio.co/">Attestation Summer</a> 2024 for <a href="https://attest.org/">EAS</a> and <a href="https://www.base.org/">BASE</a> by a based team of <a href="https://buidlguidl.com/">BuidlGuidl</a> members
+    Built for <a href="https://onchain-summer.devfolio.co/">Onchain Buildathon</a> and <a href="https://eas-onchain-summer.devfolio.co/">Attestation Summer</a> 2024 for <a href="https://attest.org/">EAS</a> and <a href="https://www.base.org/">BASE</a> by a based team of <a href="https://buidlguidl.com/">BuidlGuidl</a> members
 </div>
 <br>
 <div align="center">
@@ -66,3 +66,7 @@ Handles the payment for a product in the transaction frames
 Schema that we have for users to 'attest' to the order receipt details onchain to share with customer in warpcast DM later
 
 ## Example Frames
+
+## Similar Products
+
+- <b>Frames built by PERCS:</b> Create a Farcaster Frame with selected products from your store. Basic frame creation.
