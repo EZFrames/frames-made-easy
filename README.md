@@ -3,7 +3,7 @@
 </div>
 <br>
 <div align="center">
-    <a href="">App Demo Link</a> | <a href="https://my-on-chain-store.myshopify.com/">Example Shopify Store</a>
+    <a href="https://framify-seven.vercel.app/">App Demo Link</a> | <a href="https://my-on-chain-store.myshopify.com/">Example Shopify Store</a>
 </div>
  <br>
 <div align="center">
@@ -58,13 +58,15 @@ Emables us to leverage technologies like FARCASTER HUB to pull in data to showca
 
 ## Contracts 
 
-<b>payment contract address:</b> <a href="https://sepolia.basescan.org/address/0x059ee9bde2aff94d0e6ad396ec0ec7d27bff6dc8">0x059ee9bde2aff94d0e6ad396ec0ec7d27bff6dc8</a>
+<b>payment contract address:</b> <a href="https://sepolia.basescan.org/address/0x151630785016e17378ca5ac7eF2b0936a3e5C64f">0x151630785016e17378ca5ac7eF2b0936a3e5C64f</a>
 
 Handles the payment for a product in the transaction frames
 
-<b>EAS schema contract address / UID:</b> <a href="https://base-sepolia.easscan.org/schema/view/0x9df58a994ebd1a1d5d35b6cc9a8e417d5cbc1d4d8cd94f1b3431f71793fb43da">0x9df58a994ebd1a1d5d35b6cc9a8e417d5cbc1d4d8cd94f1b3431f71793fb43da</a>
+<b>EAS schema contract address / UID:</b> <a href="https://base-sepolia.easscan.org/schema/view/0x6cf920b46db9fc89b78efe8c06f77f1d169ab43faec920161e4c3247daff3717">0x6cf920b46db9fc89b78efe8c06f77f1d169ab43faec920161e4c3247daff3717</a>
 
 Schema that we have for users to 'attest' to the order receipt details onchain to share with customer in warpcast DM later
+
+
 
 ## Shopify Integration
 
